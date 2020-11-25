@@ -15,10 +15,10 @@ class CreateOrderAddressesTable extends Migration
     {
         Schema::create('order_addresses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('notes')->nullable();
-            $table->integer('phone');
-            $table->unsignedBigInteger('order_id');
+            $table->integer('phone')->nullable();
+            $table->unsignedBigInteger('order_id')->nullable();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->timestamps();
         });

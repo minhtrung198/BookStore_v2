@@ -1,0 +1,11 @@
+[33mcommit e42d4d1deebb49a2ea98422c889480a40c851fe5[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: trung <pnmtrung106@gmail.com>
+Date:   Tue Nov 24 13:57:10 2020 +0700
+
+    finish database
+
+[33mcommit bc47c55b20795e0a559a9062fd1c877bed5e788e[m
+Author: trung <pnmtrung106@gmail.com>
+Date:   Sat Nov 21 20:54:57 2020 +0700
+
+    finish create project

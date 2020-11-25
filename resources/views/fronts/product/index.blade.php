@@ -19,7 +19,54 @@
                 {"breakpoint":575, "settings": {"slidesToShow": 2} },
                 {"breakpoint":490, "settings": {"slidesToShow": 1} }
             ]'>
-                    <div class="single-slide">
+            
+            <div class="single-slide">
+                @foreach($products as $product)
+                        <div class="product-card">
+                            <div class="product-header">
+                                <a href="" class="author">{{$product->name}}</a>
+                                <h3><a href="product-details.html">{{$product->description}}}
+                                  </a>
+                                </h3>
+                            </div>
+                            <div class="product-card--body">
+                                <div class="card-image">
+                                <img src="{!! isset($product->image) ? asset($product->image) : '' !!}">
+                                    <div class="hover-contents">
+                                        <a href="product-details.html" class="hover-image">
+                                            <img src="img/category-3.jpg" />
+                                        </a>
+                                        <div class="hover-btns">
+                                            <a href="cart.html" class="single-btn">
+                                                <i class="fas fa-shopping-basket"></i>
+                                            </a>
+                                            <a href="wishlist.html" class="single-btn">
+                                                <i class="fas fa-heart"></i>
+                                            </a>
+                                            <a href="compare.html" class="single-btn">
+                                                <i class="fas fa-random"></i>
+                                            </a>
+                                            <a href="#" data-toggle="modal" data-target="#quickModal"
+                                                class="single-btn">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="price-block">
+                                    <span class="price">£51.20</span>
+                                    <del class="price-old">£51.20</del>
+                                    <span class="price-discount">20%</span>
+                                </div>
+                                <div class="count-down-block">
+                                    <div class="product-countdown" data-countdown="01/05/2020"></div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+            
+                    <!-- <div class="single-slide">
                         <div class="product-card">
                             <div class="product-header">
                                 <a href="" class="author">
@@ -325,8 +372,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div> 
+                </div>-->
+            
+            
+            
+            
             </div>
         </section>
 @endsection

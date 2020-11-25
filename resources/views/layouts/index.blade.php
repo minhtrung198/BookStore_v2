@@ -26,7 +26,7 @@
     <body>
     
         @include('layouts.header')
-        <h1>asdasdadsdasdsdasdsadsadassaasd</h1>
+        <h1>TRANG CHU </h1>
         @include('layouts.footer')
         @yield('content')
 

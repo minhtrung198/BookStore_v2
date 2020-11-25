@@ -17,13 +17,13 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->integer('quantity');
-            $table->string('image');
-            $table->unsignedBigInteger('author_id');
+            $table->integer('quantity')->nullable();
+            $table->string('image')->nullable();
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
-            $table->unsignedBigInteger('publisher_id');
+            $table->unsignedBigInteger('publisher_id')->nullable();
             $table->foreign('publisher_id')->references('id')->on('publishers')->onDelete('cascade');
-            $table->unsignedBigInteger('categories_id');
+            $table->unsignedBigInteger('categories_id')->nullable();
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });

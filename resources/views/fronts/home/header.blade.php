@@ -1,4 +1,5 @@
 <!-- Nav Bar Start -->
+<?php $user = Auth::user() ;?>
 <div class="nav">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -28,8 +29,14 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
                                 <div class="dropdown-menu">
-                                    <a href="#" class="dropdown-item">Login</a>
+                                @if(!$user)
+                                     <a href="{{route('login')}}" class="dropdown-item">Login</a>
                                     <a href="#" class="dropdown-item">Register</a>
+                                    @else
+                                    <a href="#" class="dropdown-item">Hi! {{\Auth::user()->first_name}}</a>
+                                    <a href="#" class="dropdown-item">Change Password</a>
+                                    <a href="{{route('logout')}}" class="dropdown-item">Logout</a>
+                                @endif
                                 </div>
                             </div>
                         </div>
