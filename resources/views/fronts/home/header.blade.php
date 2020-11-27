@@ -1,5 +1,5 @@
 <!-- Nav Bar Start -->
-<?php $user = Auth::user() ;?>
+<?php $user = \Auth::user() ;?>
 <div class="nav">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -10,12 +10,12 @@
 
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="product-list.html" class="nav-item nav-link">Products</a>
-                            <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>
-                            <a href="cart.html" class="nav-item nav-link">Cart</a>
-                            <a href="checkout.html" class="nav-item nav-link">Checkout</a>
-                            <a href="my-account.html" class="nav-item nav-link">My Account</a>
+                            <a href="index.html" class="nav-item nav-link active">Trang chủ</a>|
+                            <a href="product-list.html" class="nav-item nav-link">Sản Phẩm</a>
+                            <a href="" class="nav-item nav-link">Chi tiết sản phẩm</a>
+                            <a href="cart.html" class="nav-item nav-link">Giỏ hàng</a>
+                            <a href="checkout.html" class="nav-item nav-link">Thanh toán</a>
+                            <a href="my-account.html" class="nav-item nav-link">Thông tin người dùng</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
                                 <div class="dropdown-menu">
@@ -27,14 +27,14 @@
                         </div>
                         <div class="navbar-nav ml-auto">
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tài khoản</a>
                                 <div class="dropdown-menu">
                                 @if(!$user)
-                                     <a href="{{route('login')}}" class="dropdown-item">Login</a>
-                                    <a href="#" class="dropdown-item">Register</a>
+                                     <a href="{{route('login')}}" class="dropdown-item">Đăng nhập</a>
+                                    <a href="{{route('register')}}" class="dropdown-item">Đăng kí</a>
                                     @else
                                     <a href="#" class="dropdown-item">Hi! {{\Auth::user()->first_name}}</a>
-                                    <a href="#" class="dropdown-item">Change Password</a>
+                                    <a href="#" class="dropdown-item">Thay đổi mật khẩu</a>
                                     <a href="{{route('logout')}}" class="dropdown-item">Logout</a>
                                 @endif
                                 </div>

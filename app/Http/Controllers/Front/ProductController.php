@@ -17,6 +17,10 @@ class ProductController extends Controller
     {
         
     }
+    public function productDetail($id){
+        $products = Product::find($id);
+        return view('fronts.product.listProduct',compact('products'));
+    }
 
     /**
      * Show the form for creating a new resource.

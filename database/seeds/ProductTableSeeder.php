@@ -11,15 +11,18 @@ class ProductTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('products')->insert([
-            ['name' => 'Khoa học tuổi trẻ'],
-            ['description' => 'Cuốn Sách Khổng Lồ Về Các Thí Nghiệm Khoa Học (Với Hơn 100 Thí Nghiệm Đơn Giản Và Cực Kỳ Thú Vị!)'],
-            ['quantity' => 50],
-            ['image' => 'public/img/khoahoc2.jpg'],
-            ['author_id' => 3],
-            ['publisher_id' => 3],
-            ['categories_id' => 2],
+        // DB::table('products')->insert([
+        //     ['name' => 'Khoa học tuổi trẻ'],
+        //     ['description' => 'Cuốn Sách Khổng Lồ Về Các Thí Nghiệm Khoa Học (Với Hơn 100 Thí Nghiệm Đơn Giản Và Cực Kỳ Thú Vị!)'],
+        //     ['quantity' => 50],
+        //     ['image' => 'public/img/khoahoc3.jpg'],
             
+        // ]);
+        App\Models\Product::create([
+            'name' => 'Thiếu nhi tuổi trẻ tháng 2',
+            'description' => 'Cuốn Sách Khổng Lồ Khoa Học',
+            'quantity' => '40',
+            'image' => 'thieunhi3.jpg',
         ]);
     }
 }

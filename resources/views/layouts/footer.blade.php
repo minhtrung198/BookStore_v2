@@ -1,4 +1,3 @@
-    @section('content')
     <!-- Footer Start -->
     <div class="footer">
             <div class="container-fluid">
@@ -87,4 +86,3 @@
             </div>
         </div>
         <!-- Footer Bottom End --> 
-    @endsection

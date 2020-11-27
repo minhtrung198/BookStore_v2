@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('dashboards.users.list_user', compact('users'));
     }
 
     /**
@@ -24,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboards.users.create_user');
     }
 
     /**
@@ -35,7 +36,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['password'] = bcrypt($data['password']);
+        User::create($data);
+        return redirect()->route('dashboards.users.list_user');
     }
 
     /**
@@ -57,7 +61,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $users = User::find($id);
+        return view('dashboards.users.edit_user', compact('users'));
     }
 
     /**
@@ -69,7 +74,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except('_token', '_method');
+        $data['password'] = bcrypt($data['password']);
+        User::find($id)->update($data);
+        return redirect()->route('dashboards.users.list_user');
     }
 
     /**

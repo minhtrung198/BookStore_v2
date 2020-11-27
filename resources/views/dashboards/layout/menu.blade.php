@@ -1,40 +1,40 @@
 <div class="sidebar">
   <nav class="sidebar-nav">
     <ul class="nav">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a class="nav-link" href="">
-                <i class="nav-icon icon-speedometer"></i> Trang chủ
+                <i class="nav-icon icon-speedometer"></i> Book Store
             </a>
-        </li>
+        </li> -->
         <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" style="cursor: pointer">
-            <i class="nav-icon icons cui-user"></i>Hoạt động</a>
+            <i class="nav-icon icons cui-user"></i>Sản phẩm</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="">
-                 <i class="nav-icon icon-info"></i>Danh sách</a>
+                <a class="nav-link" href="{{route('dashboards.products.list_product')}}">
+                  <i class="nav-icon icon-info"></i>Danh sách sản phẩm</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">
-                 <i class="nav-icon icon-info"></i>Tạo hoạt động</a>
+                <a class="nav-link" href="{{route('dashboards.products.create_product')}}">
+                 <i class="nav-icon icon-info"></i>Tạo sản phẩm</a>
               </li>
             </ul>
         </li>
         <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" style="cursor: pointer">
-            <i class="nav-icon icons cui-user"></i>Địa điểm cuốn hút</a>
+            <i class="nav-icon icons cui-user"></i>User</a>
             <ul class="nav-dropdown-items">
               <li class="nav-item">
-                <a class="nav-link" href="">
-                 <i class="nav-icon icon-info"></i>Danh sách</a>
+                <a class="nav-link" href="{{route('dashboards.users.list_user')}}">
+                 <i class="nav-icon icon-info"></i>Danh sách User</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">
-                 <i class="nav-icon icon-info"></i>Tạo điểm cuốn hút</a>
+                <a class="nav-link" href="{{route('dashboards.users.create_user')}}">
+                 <i class="nav-icon icon-info"></i>Tạo user</a>
               </li>
             </ul>
         </li>
-        <li class="nav-item nav-dropdown">
+        <!-- <li class="nav-item nav-dropdown">
             <a class="nav-link nav-dropdown-toggle" style="cursor: pointer">
             <i class="nav-icon icons cui-user"></i>Khách sạn</a>
             <ul class="nav-dropdown-items">
@@ -99,7 +99,7 @@
                  <i class="nav-icon icon-info"></i>Danh sách</a>
               </li>
             </ul>
-        </li>
+        </li> -->
     </ul>
   </nav>
 </div>

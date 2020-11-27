@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\Role;
 class RoleController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::all();
+        return view('dashboards.roles.list_role', compact('roles'));
     }
 
     /**
@@ -24,7 +25,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboards.roles.create_role');
     }
 
     /**
@@ -35,7 +36,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        Role::create($data);
+        return redirect()->route('dashboards.roles.list_role');
     }
 
     /**
@@ -57,7 +60,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $roles = Role::find($id);
+        return view('dashboards.roles.edit_role', compact('roles'));
     }
 
     /**
@@ -69,7 +73,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        Role::find($id)->update($data);
+        return redirect()->route('dashboards.roles.list_role');
     }
 
     /**
@@ -80,6 +86,9 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $roles = Role::find($id);
+        $roles->delete();
+        $roles->users()->delete();
+        return redirect()->route('dashboards.roles.list_role');
     }
 }

@@ -1,4 +1,4 @@
-
+@section('content')
 <div class="tab-content" id="myTabContent">
                         <div class="tab-pane show active" id="shop" role="tabpanel" aria-labelledby="shop-tab">
                         <div class="promo-section-heading">

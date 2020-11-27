@@ -40,28 +40,22 @@
                             <nav class="navbar bg-light">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-home"></i>Home</a>
+                                        <h2>Danh mục sản phẩm</h2>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-shopping-bag"></i>Best Selling</a>
+                                        <a class="nav-link" href="#"><i class="fa fa-book"></i>Thiếu Nhi</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-plus-square"></i>New Arrivals</a>
+                                        <a class="nav-link" href="#"><i class="fa fa-book"></i>Tiếng Anh</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-female"></i>Fashion & Beauty</a>
+                                        <a class="nav-link" href="#"><i class="fa fa-book"></i>Khoa Học</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-child"></i>Kids & Babies Clothes</a>
+                                        <a class="nav-link" href="#"><i class="fa fa-book"></i>Văn Học</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-tshirt"></i>Men & Women Clothes</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-mobile-alt"></i>Gadgets & Accessories</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-microchip"></i>Electronics & Accessories</a>
+                                        <a class="nav-link" href="#"><i class="fa fa-book"></i>Giáo dục</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -69,24 +63,20 @@
                         <div class="col-md-6">
                             <div class="header-slider normal-slider">
                                 <div class="header-slider-item">
-                                    <img src="img/slider-1.jpg" alt="Slider Image" />
-                                    <div class="header-slider-caption">
-                                        <p>Some text goes here that describes the image</p>
-                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
+                                    <img src="img/bannerbook.jpg" alt="Slider Image" />
+                                    <div class="header-slider">
+                                        
                                     </div>
                                 </div>
                                 <div class="header-slider-item">
-                                    <img src="img/slider-2.jpg" alt="Slider Image" />
-                                    <div class="header-slider-caption">
-                                        <p>Some text goes here that describes the image</p>
-                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
+                                    <img src="img/bannerbook2.jpg" alt="Slider Image" />
+                                    <div class="header-slider">
+                                    <img src="img/bannerbook6.jpg" alt="Slider Image" />
                                     </div>
                                 </div>
                                 <div class="header-slider-item">
-                                    <img src="img/slider-3.jpg" alt="Slider Image" />
-                                    <div class="header-slider-caption">
-                                        <p>Some text goes here that describes the image</p>
-                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
+                                    <img src="img/bannerbook3.jpg" alt="Slider Image" />
+                                    <div class="header-slider">
                                     </div>
                                 </div>
                             </div>
@@ -94,16 +84,12 @@
                         <div class="col-md-3">
                             <div class="header-img">
                                 <div class="img-item">
-                                    <img src="img/category-1.jpg" />
-                                    <a class="img-text" href="">
-                                        <p>Some text goes here that describes the image</p>
-                                    </a>
+                                    <img src="img/bannerbook4.jpg" />
+                                    
                                 </div>
                                 <div class="img-item">
-                                    <img src="img/category-2.jpg" />
-                                    <a class="img-text" href="">
-                                        <p>Some text goes here that describes the image</p>
-                                    </a>
+                                    <img src="img/bannerbook5.jpg" />
+                                    
                                 </div>
                             </div>
                         </div>
@@ -183,21 +169,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="category-item ch-250">
-                                <img src="img/category-4.jpg" />
-                                <a class="category-name" href="">
-                                    <p>Some text goes here that describes the image</p>
-                                </a>
-                            </div>
-                            <div class="category-item ch-150">
-                                <img src="img/category-5.jpg" />
-                                <a class="category-name" href="">
-                                    <p>Some text goes here that describes the image</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
+                        
+                        <!-- <div class="col-md-3">
                             <div class="category-item ch-150">
                                 <img src="img/category-6.jpg" />
                                 <a class="category-name" href="">
@@ -210,10 +183,10 @@
                                     <p>Some text goes here that describes the image</p>
                                 </a>
                             </div>
-                        </div>
-                        <div class="col-md-3">
+                        </div> -->
+                        <div class="col-md-9">
                             <div class="category-item ch-400">
-                                <img src="img/category-8.jpg" />
+                                <img src="img/banner.png" />
                                 <a class="category-name" href="">
                                     <p>Some text goes here that describes the image</p>
                                 </a>

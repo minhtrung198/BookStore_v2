@@ -42,10 +42,10 @@ class UserTableSeeder extends Seeder
             'first_name' => 'user',
             'last_name' => 'trung',
             'phone' => '0124555',
-            'email' => 'user@admin.com',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('123123'),
-            'role_id' => 2,
-            'address_id' => '2',
+            'role_id' => 1,
+            'address_id' => '1',
         ]);
     }
 }

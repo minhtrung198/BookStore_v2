@@ -16,9 +16,10 @@ class HomeController extends Controller
     public function index()
     {
         $products = Product::all();
+        //dd($products);
         return view('fronts.home.index',compact('products'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *

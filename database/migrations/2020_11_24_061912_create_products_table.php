@@ -16,15 +16,16 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->integer('quantity')->nullable();
             $table->string('image')->nullable();
+            $table->integer('price')->nullable();
             $table->unsignedBigInteger('author_id')->nullable();
             $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
             $table->unsignedBigInteger('publisher_id')->nullable();
             $table->foreign('publisher_id')->references('id')->on('publishers')->onDelete('cascade');
-            $table->unsignedBigInteger('categories_id')->nullable();
-            $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
