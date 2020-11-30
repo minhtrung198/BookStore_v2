@@ -30,7 +30,12 @@ Route::get('/admin','Dashboard\HomeController@index')->name('admin-dashboard');
 //Front
 Route::get('/product','Front\ProductController@index')->name('list-product');
 Route::get('/product/{id}/detail','Front\ProductController@productDetail')->name('product.detail');
-
+//show infomation user detail
+Route::get('/user/{id}/detail', 'Front\UserController@userDetail')->name('user-detail');
+//show edit user
+Route::get('/user/{id}/edit','Front\UserController@edit')->name('user-edit');
+//update infomation
+Route::put('/user/{id}','Front\UserController@update')->name('user-update');
 
 //homepage
 Route::get('/','Front\HomeController@index')->name('front-dashboard');

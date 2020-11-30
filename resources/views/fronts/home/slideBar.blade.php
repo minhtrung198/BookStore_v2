@@ -55,8 +55,15 @@
                                         <a class="nav-link" href="#"><i class="fa fa-book"></i>Văn Học</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-book"></i>Giáo dục</a>
+                                        <a class="nav-link" href="#"><i class="fa fa-book"></i>Tiểu thuyết</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><i class="fa fa-book"></i>Kỹ Năng Sống</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><i class="fa fa-book"></i>Văn Hóa - Địa Lý</a>
+                                    </li>
+                                    
                                 </ul>
                             </nav>
                         </div>

@@ -5,7 +5,7 @@
         <section class="section-margin">
             <div class="container-fluid">
                 <div class="promo-section-heading">
-                    <h2>Deal of the day up to 20% off Special offer</h2>
+                    <h2>Những cuốn sách bán chạy nhất tháng 11</h2>
                 </div>
                 <div class="product-slider with-countdown  slider-border-single-row sb-slick-slider" data-slick-setting='{
                 "autoplay": true,
@@ -27,11 +27,11 @@
                                 <a href="#" class="author">
                                     Upple
                                 </a>
-                                <h3><a href="product-details.html">Here Is A Quick For For Cure For Book</a></h3>
+                                <h3><a href="product-details.html">Hơn 100 Thí Nghiệm Vui Và Đơn Giản</a></h3>
                             </div>
                             <div class="product-card--body">
                                 <div class="card-image">
-                                <img src="img/category-3.jpg" />
+                                <img src="img/khoahoc1.jpg" />
 
                                     <div class="hover-contents">
                                         <a href="product-details.html" class="hover-image">
@@ -55,8 +55,8 @@
                                     </div>
                                 </div>
                                 <div class="price-block">
-                                    <span class="price">£51.20</span>
-                                    <del class="price-old">£51.20</del>
+                                    <span class="price">45.100 VNĐ</span>
+                                    <del class="price-old">31.20 VNĐ</del>
                                     <span class="price-discount">20%</span>
                                 </div>
                                 <div class="count-down-block">
@@ -71,11 +71,11 @@
                                 <a href="#" class="author">
                                     Ypple
                                 </a>
-                                <h3><a href="product-details.html">a Half Very Simple Things You To Save</a></h3>
+                                <h3><a href="product-details.html">Sách Khoa Học Khổng Lồ Thường Thức</a></h3>
                             </div>
                             <div class="product-card--body">
                                 <div class="card-image">
-                                    <img src="img/category-3.jpg" />
+                                    <img src="img/khoahoc2.jpg" />
                                     <div class="hover-contents">
                                         <a href="product-details.html" class="hover-image">
                                             <img src="image/products/product-2.jpg" alt="">
@@ -98,8 +98,8 @@
                                     </div>
                                 </div>
                                 <div class="price-block">
-                                    <span class="price">£51.20</span>
-                                    <del class="price-old">£51.20</del>
+                                    <span class="price">100.500 VNĐ</span>
+                                    <del class="price-old">90.100 VNĐ</del>
                                     <span class="price-discount">20%</span>
                                 </div>
                                 <div class="count-down-block">
@@ -119,7 +119,7 @@
                             </div>
                             <div class="product-card--body">
                                 <div class="card-image">
-                                    <img src="img/category-3.jpg" />
+                                    <img src="img/thieunhi1.jpg" />
                                     <div class="hover-contents">
                                         <a href="product-details.html" class="hover-image">
                                             <img src="image/products/product-4.jpg" alt="">

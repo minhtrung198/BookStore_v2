@@ -10,12 +10,11 @@
 
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="index.html" class="nav-item nav-link active">Trang chủ</a>|
+                            <a href="{{route('front-dashboard')}}" class="nav-item nav-link active">Trang chủ</a>|
                             <a href="product-list.html" class="nav-item nav-link">Sản Phẩm</a>
                             <a href="product-detail.html" class="nav-item nav-link">Chi tiết sản phẩm</a>
                             <a href="cart.html" class="nav-item nav-link">Giỏ hàng</a>
                             <a href="checkout.html" class="nav-item nav-link">Thanh toán</a>
-                            <a href="my-account.html" class="nav-item nav-link">Thông tin người dùng</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
                                 <div class="dropdown-menu">

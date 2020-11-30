@@ -39,12 +39,19 @@ class UserTableSeeder extends Seeder
         // ]);
 
         App\Models\User::create([
+            // 'first_name' => 'admin',
+            // 'last_name' => 'admin',
+            // 'phone' => '0124555',
+            // 'email' => 'admin@gmail.com',
+            // 'password' => bcrypt('123123'),
+            // 'role_id' => 1,
+            // 'address_id' => '3',
             'first_name' => 'user',
-            'last_name' => 'trung',
+            'last_name' => 'user',
             'phone' => '0124555',
-            'email' => 'admin@gmail.com',
+            'email' => 'user@gmail.com',
             'password' => bcrypt('123123'),
-            'role_id' => 1,
+            'role_id' => 2,
             'address_id' => '1',
         ]);
     }

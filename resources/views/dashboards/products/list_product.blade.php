@@ -8,6 +8,8 @@
 			<th>Name</th>
 			<th>Description</th>
 			<th>Quantity</th>
+			<th>Price</th>
+			<th>Status</th>
 			<th>AuthorID</th>
 			<th>PublisherID</th>
 			<th>CategoryID</th>
@@ -23,6 +25,16 @@
 			<td>{{$product->name}}</td>
 			<td>{{$product->description}}</td>
 			<td>{{$product->quantity}}</td>
+			<td>{{$product->price}}</td>
+			<td>
+				<?php 
+				if($product->status==0){
+					echo 'Ẩn';
+				}else{
+					echo 'Hiển thị';
+				}
+				?>
+			</td>
 			<td>{{$product->author_id}}</td>
 			<td>{{$product->publisher_id}}</td>
 			<td>{{$product->category_id}}</td>

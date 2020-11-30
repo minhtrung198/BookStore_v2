@@ -15,26 +15,25 @@
                             <a href="" class="nav-item nav-link">Chi tiết sản phẩm</a>
                             <a href="cart.html" class="nav-item nav-link">Giỏ hàng</a>
                             <a href="checkout.html" class="nav-item nav-link">Thanh toán</a>
-                            <a href="my-account.html" class="nav-item nav-link">Thông tin người dùng</a>
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Pages</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục</a>
                                 <div class="dropdown-menu">
-                                    <a href="wishlist.html" class="dropdown-item">Wishlist</a>
-                                    <a href="login.html" class="dropdown-item">Login & Register</a>
-                                    <a href="contact.html" class="dropdown-item">Contact Us</a>
+                                    @foreach($categories as $category)
+                                        <a href="wishlist.html" class="dropdown-item">{{$category->name}}</a>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                         <div class="navbar-nav ml-auto">
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tài khoản</a>
+                                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Tài khoản</a>
                                 <div class="dropdown-menu">
                                 @if(!$user)
                                      <a href="{{route('login')}}" class="dropdown-item">Đăng nhập</a>
                                     <a href="{{route('register')}}" class="dropdown-item">Đăng kí</a>
                                     @else
                                     <a href="#" class="dropdown-item">Hi! {{\Auth::user()->first_name}}</a>
-                                    <a href="#" class="dropdown-item">Thay đổi mật khẩu</a>
+                                    <a href="{{route('user-detail',$user->id)}}" class="dropdown-item">Thông tin</a>
                                     <a href="{{route('logout')}}" class="dropdown-item">Logout</a>
                                 @endif
                                 </div>

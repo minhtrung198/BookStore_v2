@@ -15,7 +15,6 @@ class ProductController extends Controller
      */
     public function index()
     {
-        
     }
     public function productDetail($id){
         $products = Product::find($id);

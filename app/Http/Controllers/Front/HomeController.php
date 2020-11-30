@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,8 +17,9 @@ class HomeController extends Controller
     public function index()
     {
         $products = Product::all();
-        //dd($products);
-        return view('fronts.home.index',compact('products'));
+        $categories = Category::all();
+        //dd($categories);
+        return view('fronts.home.index',compact('products','categories'));
     }
     
     /**

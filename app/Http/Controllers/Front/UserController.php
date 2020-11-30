@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Front;
-
+use App\Models\User;
+use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -35,7 +36,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -57,7 +58,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $users = User::find($id);
+        return view('fronts.customer.index',compact('users'));
     }
 
     /**
@@ -69,7 +71,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->except('_method','_token');
+        User::find($id)->update($data);
+        return redirect()->route('user-detail');
     }
 
     /**
@@ -81,5 +85,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function userDetail($id)
+    {
+        $users = User::with('address')->find($id);
+        //dd($users->toArray());
+        return view('fronts.customer.index',compact('users'));
     }
 }
