@@ -16521,7 +16521,7 @@ input[type="number"] {
   padding: 10px 0; }
   .cart-block:before {
     content: "\f23d";
-    font-family: "Font Awesome 5 Brands";
+    font-family: "Font Awesome\ 5 Brands";
     font-size: 34px;
     color: #62ab00;
     display: inline-block;
@@ -16917,7 +16917,7 @@ input[type="number"] {
       -ms-flex-align: center;
       align-items: center;
       height: 100%;
-      font-family: "Font Awesome 5 Free";
+      font-family: "Font Awesome\ 5 Free";
       font-weight: 900;
       top: 0;
       margin-right: 25px; }
@@ -17006,7 +17006,7 @@ input[type="number"] {
         position: absolute;
         content: "\f078";
         right: 0;
-        font-family: "font Awesome 5 Free";
+        font-family: "Font Awesome\ 5 Free";
         font-size: 10px;
         font-weight: 900;
         margin-right: 20px;
@@ -19574,7 +19574,7 @@ input[type="number"] {
 
 .rating-widget-block label:before {
   content: "\f005";
-  font-family: "Font Awesome 5 Free";
+  font-family: "Font Awesome\ 5 Free";
   position: relative;
   display: block;
   font-size: 16px;
@@ -19583,7 +19583,7 @@ input[type="number"] {
 
 .rating-widget-block label:after {
   content: "\f005";
-  font-family: "Font Awesome 5 Free";
+  font-family: "Font Awesome\ 5 Free";
   position: absolute;
   display: block;
   font-size: 16px;
@@ -20506,7 +20506,7 @@ input[type="number"] {
           top: 0;
           display: block;
           content: "\f00c";
-          font-family: "Font Awesome 5 Free";
+          font-family: "Font Awesome\ 5 Free";
           font-weight: 900;
           font-size: 12px;
           line-height: 20px;
@@ -20738,7 +20738,7 @@ input[type="number"] {
   width: auto;
   word-wrap: break-word; }
   .method-notice:before {
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'Font Awesome\ 5 Free';
     content: '\f249';
     display: inline-block;
     position: absolute;

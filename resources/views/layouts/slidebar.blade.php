@@ -1,5 +1,5 @@
     <!-- Bottom Bar Start -->
-            <div class="bottom-bar">
+    <div class="bottom-bar">
                 <div class="container-fluid">
                     <div class="row align-items-center">
                         <div class="col-md-3">
@@ -43,11 +43,9 @@
                                         <h2>Danh mục sản phẩm</h2>
                                     </li>
                                     <li class="nav-item">
-                                        @foreach($categories as $category)
-                                        <a class="nav-link" href="{{route('cate-product',$category->id)}}"><i class="fa fa-book"></i>{{$category->name}}<span>(12)</span></a>
-                                        @endforeach
+                                        <a class="nav-link" href="#"><i class="fa fa-book"></i>Thiếu Nhi</a>
                                     </li>
-                                    <!-- <li class="nav-item">
+                                    <li class="nav-item">
                                         <a class="nav-link" href="#"><i class="fa fa-book"></i>Tiếng Anh</a>
                                     </li>
                                     <li class="nav-item">
@@ -64,7 +62,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#"><i class="fa fa-book"></i>Văn Hóa - Địa Lý</a>
-                                    </li> -->
+                                    </li>
                                     
                                 </ul>
                             </nav>

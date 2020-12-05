@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     protected $fillable = ['quantity','name', 'description','price','status','image'];
@@ -15,11 +15,11 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\Review');
     }
-    public function authors()
+    public function author()
     {
         return $this->belongsTo('App\Models\Author');
     }
-    public function pubishers()
+    public function publisher()
     {
         return $this->belongsTo('App\Models\Publisher');
     }

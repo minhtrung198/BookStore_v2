@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddStatusToProductsTable extends Migration
+class AddStatusToCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddStatusToProductsTable extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->string('status')->after('price')->default(0);
+        Schema::table('categories', function (Blueprint $table) {
+            $table->integer('status')->after('parent_id')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddStatusToProductsTable extends Migration
      */
     public function down()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('categories', function (Blueprint $table) {
             Schema::dropIfExists('status');
         });
     }

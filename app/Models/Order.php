@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     protected $fillable = ['status'];
@@ -15,9 +15,6 @@ class Order extends Model
     {
         return $this->hasMany('App\Models\OrderDetail');
     }
-    public function orderAddresses()
-    {
-        return $this->hasOne('App\Models\OrderAddress');
-    }
+    
 
 }

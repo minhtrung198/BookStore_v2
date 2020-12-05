@@ -28,15 +28,29 @@ Route::post('/register','Auth\RegisterController@register')->name('register');
 Route::get('/admin','Dashboard\HomeController@index')->name('admin-dashboard');
 
 //Front
+//show product
 Route::get('/product','Front\ProductController@index')->name('list-product');
-Route::get('/product/{id}/detail','Front\ProductController@productDetail')->name('product.detail');
+//show product category
+Route::get('/product/{id}','Front\ProductController@cateProduct')->name('cate-product');
 //show infomation user detail
 Route::get('/user/{id}/detail', 'Front\UserController@userDetail')->name('user-detail');
 //show edit user
 Route::get('/user/{id}/edit','Front\UserController@edit')->name('user-edit');
 //update infomation
 Route::put('/user/{id}','Front\UserController@update')->name('user-update');
+//show detail product
+Route::get('/product/{id}/detail','Front\ProductController@productDetail')->name('product.detail');
 
+//Cart
+Route::post('/add-cart','Front\CartController@add-cart-ajax')->name('add.cart');
+Route::post('/save-cart','Front\CartController@save_cart')->name('save-cart');
+Route::get('/show-cart','Front\CartController@index')->name('show-cart');
+Route::get('/delete-to-cart/{rowId}','Front\CartController@deleteToCart')->name('delete-to-cart');
+Route::post('/update-to-cart','Front\CartController@updateQuantityToCart')->name('update-to-cart-quantity');
+
+//Checkout
+Route::get('/checkout','Front\CheckoutController@checkout')->name('checkout');
+Route::get('/show-checkout','Front\CheckoutController@index')->name('show-checkout');
 //homepage
 Route::get('/','Front\HomeController@index')->name('front-dashboard');
 

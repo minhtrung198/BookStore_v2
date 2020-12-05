@@ -19,6 +19,7 @@
         <link href="lib/slick/slick-theme.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" media="screen" href="css/plugins.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+        <link rel="stylesheet" href="css/sweetalert.css">
         <link rel="shortcut icon" type="image/x-icon" href="image/favicon.ico">
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
@@ -31,7 +32,7 @@
         @yield('content')
         @include('fronts.product.listProduct')
         @include('fronts.home.footer')
-
+        
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Bootstrap JavaScript -->
@@ -49,5 +50,33 @@
         <script src="js/plugins.js"></script>
         <script src="js/ajax-mail.js"></script>
         <script src="js/custom.js"></script>
+        <script src="{{asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
+        <!-- <script type="text/javascript">
+            $(document).ready(function(){
+                $('.add-to-cart').click(function(){
+                   var id=$(this).data('id');
+                   var cart_id = $('.cart_id_' + id).val();
+                   var cart_name = $('.cart_name_' + id).val();
+                   var cart_image = $('.cart_image_' + id).val();
+                   var cart_price = $('.cart_price_' + id).val();
+                   var cart_qty = $('.cart_qty_' + id).val();
+                   var _token = $('input[name="_token"]').val();
+                   $.ajax({
+                         url: '{{url('Front/CartController/add_cart_ajax')}}',
+                        method: 'POST',
+                        data:{
+                            cart_id:cart_id,
+                            cart_name:cart_name,
+                            cart_image:cart_image,
+                            cart_price:cart_price,
+                            cart_qty:cart_qty,
+                            _token:_token},
+                        success:function(data){
+                            alert(data);
+                        }
+                   }); 
+                });
+            });
+        </script> -->
     </body>
 </html>

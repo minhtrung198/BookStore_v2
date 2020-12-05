@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
-
+use App\Models\Authors;
+use App\Models\Publishers;
 class ProductController extends Controller
 {
     /**
@@ -15,12 +17,23 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $products = Product::all();
+        //$categories = Category::all();
+        return view('fronts.product.main',compact('products'));
     }
     public function productDetail($id){
-        $products = Product::find($id);
-        return view('fronts.product.listProduct',compact('products'));
+        $products = Product::with('author','publisher')->find($id);
+        return view('fronts.product.detail',compact('products'));
     }
-
+    public function cateProduct($id)
+    {
+       // $categories = Category::all();
+        //lấy sp theo thể loại, 
+        $categories = Category::where('id',$id)->first();//lấy thể loại mình cần lấy
+        $products = Product::where('category_id', $categories->id)->get();//sau đó trỏ tới sản phẩm mình muốn lấy thông  qua category-id
+        return view('fronts.product.category',compact('categories','products'));
+    }
+  
     /**
      * Show the form for creating a new resource.
      *

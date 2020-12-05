@@ -1,8 +1,9 @@
+
 @section('content')
     <div class="tab-content" id="myTabContent">
             <div class="tab-pane show active" id="shop" role="tabpanel" aria-labelledby="shop-tab">
             <div class="promo-section-heading">
-        <h2>Most View Product</h2>
+        <h2>Những Cuốn Sách Phổ Biến</h2>
     </div>
 <div class="row">
     @foreach($products as $product)
@@ -21,24 +22,29 @@
                             <a href="product-details.html" class="hover-image">
                             </a>
                             <div class="hover-btns">
-                                <a href="cart.html" class="single-btn">
-                                    <i class="fas fa-shopping-basket"></i>
-                                </a>
-                                <a href="wishlist.html" class="single-btn">
-                                    <i class="fas fa-heart"></i>
-                                </a>
-                                <a href="compare.html" class="single-btn">
-                                    <i class="fas fa-random"></i>
-                                </a>
-                                <a href="" data-toggle="modal" data-target="#quickModal"
-                                    class="single-btn">
-                                    <i class="fas fa-eye"></i>
-                                </a>
+                                <form>
+                                    @csrf
+                                    <input type="hidden" value="{{$product->id}}" class="cart_id_{{$product->id}}">
+                                    <input type="hidden" value="{{$product->name}}" class="cart_name_{{$product->name}}">
+                                    <input type="hidden" value="{{$product->image}}" class="cart_image_{{$product->image}}">
+                                    <input type="hidden" value="{{$product->price}}" class="cart_price_{{$product->price}}">
+                                    <input type="hidden" value="1" class="cart_qty_{{$product->quantity}}">
+                                    
+                                    <a href="{{route('product.detail',$product->id)}}" class="single-btn">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <!-- <a href="{{route('product.detail',$product->id)}}" class="single-btn">
+                                        <i class="fas fa-eye"></i>
+                                    </a> -->
+                                    <button type="button" class="single-btn add-to-cart" data-id="{{$product->id}}" name="add-to-cart">
+                                        <i class="fas fa-shopping-basket"></i>
+                                    </button>
+                                </form>    
                             </div>
                         </div>
                     </div>
                     <div class="price-block">
-                        <span class="price">{{$product->price}} VNĐ</span>
+                        <span class="price" style="font-size:15px;">{{number_format($product->price).' '.'vnđ'}}</span>
                         <h4><a href="product-details.html">{{$product->name}}</a></h4>
 
                        <!--  <del class="price-old">70.000VNĐ</del>
@@ -52,5 +58,5 @@
     </div>  
     @endforeach
 </div>
-<br>
+
     
