@@ -1,6 +1,6 @@
 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="">
                             <nav class="navbar bg-light">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">

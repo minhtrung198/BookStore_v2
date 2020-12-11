@@ -1,4 +1,5 @@
-@extends('dashboards.layout.master')
+@extends('dashboards.layout.index')
+@section('js')
 @section('content')
 <form action="{{route('dashboards.orderDetails.store')}}" method="POST" role="form">
 	<legend>Create OrderDetails</legend>
@@ -10,12 +11,12 @@
 
 	<div class="form-group">
 		<label for="">Price</label>
-		<input type="number" class="form-control" name="price" placeholder="Input field">
+		<input type="text" class="form-control" name="price" placeholder="Input field">
 	</div>
 
 	<div class="form-group">
 		<label for="">Discount</label>
-		<input type="number" class="form-control" name="discount" placeholder="Input field">
+		<input type="text" class="form-control" name="discount" placeholder="Input field">
 	</div>
 
 	<div class="form-group">

@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::where('status', 1)->paginate(10);
         //$categories = Category::all();
         return view('fronts.product.main',compact('products'));
     }

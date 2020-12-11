@@ -86,6 +86,8 @@ class AddressController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $addresses = Address::find($id);
+        $addresses->users()->delete();
+        return redirect()->route('dashboards.addresses.list_address');
     }
 }

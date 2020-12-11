@@ -48,7 +48,7 @@
         <script src="{{asset('js/custom.js')}}"></script>
         <script src="{{asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
         
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
         $(document).ready(function(){
             $('.checkout-cart').click(function(){
                 swal("Đăng nhập để tiếp tục"),{
@@ -56,6 +56,6 @@
                 }
             });
         });
-</script>
+</script> -->
     </body>
 </html>

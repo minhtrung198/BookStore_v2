@@ -1,4 +1,5 @@
-@extends('dashboards.layout.master')
+@extends('dashboards.layout.index')
+@section('js')
 @section('content')
 <form action="{{route('dashboards.categories.store')}}" method="POST" role="form">
 	<legend>Create Catgories</legend>

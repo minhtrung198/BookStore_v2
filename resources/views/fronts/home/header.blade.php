@@ -20,7 +20,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <a href="{{route('show-cart')}}" class="nav-item nav-link">Giỏ hàng</a>
+                            <a href="{{route('show-cartt')}}" class="nav-item nav-link">Giỏ hàng</a>
                             <a href="checkout.html" class="nav-item nav-link">Thanh toán</a>
                         </div>
                         <div class="navbar-nav ml-auto">
@@ -42,4 +42,10 @@
                 </nav>
             </div>
         </div>
+            @if (session()->has('message'))
+                    <div class="alert alert-success center-block" role="alert" style="width: 300px;">
+                    <h4 align="center" style="color:black;font-size: 16px;">{{ session()->get('message') }}</h4>
+                    </div>
+            @endif
+       
         <!-- Nav Bar End -->   

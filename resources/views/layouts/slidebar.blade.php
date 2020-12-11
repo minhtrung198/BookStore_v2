@@ -10,10 +10,13 @@
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <form action="{{route('get-search')}}" method="GET">
+                            @csrf
                             <div class="search">
-                                <input type="text" placeholder="Search">
-                                <button><i class="fa fa-search"></i></button>
+                                <input type="text" name="key" placeholder="TÌm kiếm sản phẩm">
+                                <button type="submit"><i class="fa fa-search"></i></button>
                             </div>
+                            </form>
                         </div>
                         <div class="col-md-3">
                             <div class="user">
@@ -43,9 +46,11 @@
                                         <h2>Danh mục sản phẩm</h2>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><i class="fa fa-book"></i>Thiếu Nhi</a>
+                                        @foreach($categories as $category)
+                                        <a class="nav-link" href="{{route('cate-product',$category->id)}}"><i class="fa fa-book"></i>{{$category->name}}<span>(12)</span></a>
+                                        @endforeach
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" href="#"><i class="fa fa-book"></i>Tiếng Anh</a>
                                     </li>
                                     <li class="nav-item">
@@ -62,7 +67,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#"><i class="fa fa-book"></i>Văn Hóa - Địa Lý</a>
-                                    </li>
+                                    </li> -->
                                     
                                 </ul>
                             </nav>
@@ -165,7 +170,7 @@
             <!-- Feature End-->      
             
             <!-- Category Start-->
-            <div class="category">
+            <!-- <div class="category">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-3">
@@ -177,7 +182,7 @@
                             </div>
                         </div>
                         
-                        <!-- <div class="col-md-3">
+                        <div class="col-md-3">
                             <div class="category-item ch-150">
                                 <img src="img/category-6.jpg" />
                                 <a class="category-name" href="">
@@ -190,7 +195,7 @@
                                     <p>Some text goes here that describes the image</p>
                                 </a>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="col-md-9">
                             <div class="category-item ch-400">
                                 <img src="img/banner.png" />
@@ -201,7 +206,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+            
             <!-- Category End-->    
     <!-- Call to Action Start -->
     <!-- <div class="call-to-action">

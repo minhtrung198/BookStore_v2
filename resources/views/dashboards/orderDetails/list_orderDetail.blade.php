@@ -1,4 +1,5 @@
-@extends('dashboards.layout.master')
+@extends('dashboards.layout.index')
+@section('js')
 @section('content')
 <h1>List orderDetails</h1>
 <table class="table table-hover">
@@ -19,8 +20,8 @@
 		<tr>
 			<td>{{$orderDetail->id}}</td>
 			<td>{{$orderDetail->quantity}}</td>
-			<td>{{$orderDetail->price}}</td>
-			<td>{{$orderDetail->discount}}</td>
+			<td>{{$orderDetail->price}} VNĐ</td>
+			<td>{{$orderDetail->discount}} VNĐ</td>
 			<td>{{$orderDetail->order_id}}</td>
 			<td>{{$orderDetail->product_id}}</td>
 			<td><a href="{{route('dashboards.orderDetails.edit_orderDetail', $orderDetail->id)}}" class="btn btn-success">Edit</a></td>

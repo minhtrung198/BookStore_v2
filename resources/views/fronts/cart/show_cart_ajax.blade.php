@@ -1,23 +1,13 @@
 @extends('fronts.layouts.index')
-
-
 @section('content')
 @include('fronts.home.menubar')
 <?php $user = \Auth::user() ;?>
 <div class="cart-page">
             <div class="container-fluid">
                 <div class="row" style="margin-top: -289px;margin-left: 300px">
-                @if (session()->has('message'))
-				<div class="alert alert-danger" role="alert">
-				  <h4 align="center" style="color:red">{{ session()->get('message') }}</h4>
-				</div>
-			@endif
                     <div class="col-md-12">
                         <div class="cart-page-inner">
                             <div class="table-responsive">
-                                @php
-                                    $content=Cart::content();
-                                @endphp
                                 <table class="table table-bordered">
                                     <thead class="thead-dark">
                                         <tr>
@@ -25,44 +15,38 @@
                                             <th>Giá</th>
                                             <th>Số lượng</th>
                                             <th>Tổng tiền</th>
+                                            <th>Xóa</th>
                                         </tr>
                                     </thead>
                                     <tbody class="align-middle">
-                                        @foreach($content as $cart)
-                                        
+                                       @php
+                                            print_r(Session::get('cart'));
+                                       @endphp
                                         <tr>
                                             <td>
                                                 <div class="img">
-                                                    <a href="#"><img src="{{ URL::to('/img/'.$cart->options->image) }}" width="50px" alt="Image"></a>
-                                                    <p>{{$cart->name}}</p>
+                                                    <a href="#"><img src="" width="50px" alt="Image"></a>
+                                                    <p></p>
                                                 </div>
                                             </td>
-                                            <td>{{number_format($cart->price).' '.'vnđ'}}</td>
+                                            <td></td>
                                             <td>
                                                 <div class="qty">
-                                             <form action="{{route('update-to-cart-quantity')}}" method="post">
-                                                @csrf
-                                                    <!-- <button class="btn-minus"><i class="fa fa-minus"></i></button> -->
-                                                    <!-- <input type="number" name="cart_quantity" value="{{$cart->qty}}"> -->
-                                                    <input name="cart_quantity" type="number" value="{{$cart->qty}}" autocomplete="off" size="2" onchange="updateCart(this.value, '{{$cart->rowId}}')" min="0", max="10">
-                                                    <!-- <button class="btn-plus"><i class="fa fa-plus"></i></button> -->
-                                                    <input type="hidden" value="{{$cart->rowId}}" name="rowId_cart">
-                                                    
+                                                <form action="" method="post">
+                                                    <button class="btn-minus"><i class="fa fa-minus"></i></button>
+                                                    <input type="text" name="cart_quantity" value="">
+                                                    <button class="btn-plus"><i class="fa fa-plus"></i></button>
+                                                    <input type="hidden" value="" name="rowId_cart">
                                                 </div>
                                             </td>
                                             <td> 
-                                                @php
-                                                    $subtotal = $cart->price * $cart->qty;
-                                                @endphp
-                                                {{number_format($subtotal).' '.'vnđ'}}
-                                                
                                             </td>
-                                            <td><a href="{{route('delete-to-cart',$cart->rowId)}}" class="btn btn-primary">
-                                                    <p>Xoa</p>
+                                            <td><a href="">
+                                                    <button type="submit" name="update-cart"><i class="fa fa-trash"></i></button>
                                                 </a>
                                             </td>
                                         </tr>
-                                         @endforeach
+                                        
                                     </tbody>
                                 </table>
                                 <div class="btn btn-default cart-btn" style="float: right;background-color: #FF6F61;color:white;width:127px;">
@@ -89,12 +73,14 @@
                                     <div class="cart-summary">
                                         <div class="cart-content">
                                             <h1>Tổng đơn hàng</h1>
-                                            <p>Tổng tiền<span>{{Cart::Subtotal().' '.'vnđ'}}</span></p>
+                                            <p>Tổng tiền<span></span></p>
                                             <p>Tiền ship<span>Miễn phí</span></p>
-                                            <h2>Thành Tiền<span>{{Cart::Subtotal().' '.'vnđ'}}</span></h2>
+                                            <h2>Thành Tiền<span></span></h2>
                                         </div>
                                         <div class="cart-btn">
-                                            <a href="{{route('show-checkout')}}" style="float: right;"><button style="width: 115px;">Thanh Toán</button></a>
+                                            
+                                            <a href="{{route('show-checkout')}}"><button style="width: 115px;">Thanh Toán</button></a>
+                                        
                                         </div>
                                     </div>
                                 </div>
@@ -175,5 +161,6 @@
             </div>
         </div>
         <!-- Footer End -->
+       
        
 @endsection

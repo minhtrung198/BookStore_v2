@@ -1,4 +1,5 @@
-@extends('dashboards.layout.master')
+@extends('dashboards.layout.index')
+@section('js')
 @section('content')
 <form action="{{route('dashboards.users.store')}}" method="POST" role="form">
 	<legend>Create Users</legend>
@@ -23,10 +24,10 @@
 		<input type="email" class="form-control" name="email" placeholder="Input field">
 	</div>
 
-	<div class="form-group">
+	<!-- <div class="form-group">
 		<label for="">Email Verified At</label>
 		<input type="email" class="form-control" name="email_verified_at" placeholder="Input field">
-	</div>
+	</div> -->
 
 	<div class="form-group">
 		<label for="">Password</label>
@@ -34,14 +35,16 @@
 	</div>
 
 	<div class="form-group">
-		<label for="">Role ID</label>
-		<input type="number" class="form-control" name="role_id" placeholder="Input field">
+		<label for="">Address</label>
+		<input type="text" class="form-control" name="address" placeholder="Input field">
 	</div>
 
-	<div class="form-group">
-		<label for="">Address ID</label>
-		<input type="number" class="form-control" name="address_id" placeholder="Input field">
-	</div>
+	<select name="role_id" id="inputRole_id" class="form-control" required="required">
+		<option value="">Select</option>
+		@foreach($roles as $role)
+		<option value="{{$role->id}}"><span class="badge badge-secondary">{{ $role->name }}</span></option>
+		@endforeach
+	</select>
 
 	<div class="form-group">
 		<label for="">Image</label>

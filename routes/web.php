@@ -24,9 +24,6 @@ Route::get('/logout','Auth\LoginController@logout')->name('logout');
 Route::get('/register','Auth\RegisterController@showRegistrationForm')->name('form-register');
 Route::post('/register','Auth\RegisterController@register')->name('register');
 
-//admin
-Route::get('/admin','Dashboard\HomeController@index')->name('admin-dashboard');
-
 //Front
 //show product
 Route::get('/product','Front\ProductController@index')->name('list-product');
@@ -42,7 +39,8 @@ Route::put('/user/{id}','Front\UserController@update')->name('user-update');
 Route::get('/product/{id}/detail','Front\ProductController@productDetail')->name('product.detail');
 
 //Cart
-Route::post('/add-cart','Front\CartController@add-cart-ajax')->name('add.cart');
+Route::post('/add-cart-ajax','Front\CartController@add_cart_ajax')->name('add.cart');
+Route::get('/show-cartt','Front\CartController@showCartbyAjax')->name('show-cartt');//show cart ajax
 Route::post('/save-cart','Front\CartController@save_cart')->name('save-cart');
 Route::get('/show-cart','Front\CartController@index')->name('show-cart');
 Route::get('/delete-to-cart/{rowId}','Front\CartController@deleteToCart')->name('delete-to-cart');
@@ -50,13 +48,34 @@ Route::post('/update-to-cart','Front\CartController@updateQuantityToCart')->name
 
 //Checkout
 Route::get('/checkout','Front\CheckoutController@checkout')->name('checkout');
-Route::get('/show-checkout','Front\CheckoutController@index')->name('show-checkout');
+Route::get('/show-checkout','Front\OrderController@index')->name('show-checkout');
+Route::post('/save-checkout-order','Front\OrderController@save_checkout')->name('save-checkout');
+
+//send-mail
+Route::get('/contact-us','Front\HomeController@showContactForm')->name('form-contact');
+Route::post('contact-us','Front\HomeController@sendEmail')->name('send-contact');
 //homepage
 Route::get('/','Front\HomeController@index')->name('front-dashboard');
 
-
+//Search
+Route::get('/search','Front\HomeController@search')->name('get-search');
 
 Auth::routes();
+
+//Admin:
+Route::get('/admin','Dashboard\HomeController@index')->name('admin-dashboard');
+
+Route::get('/login','Auth\LoginController@showLoginForm')->name('form-login');
+
+Route::post('/login','Auth\LoginController@login')->name('login');
+
+Route::get('/logout','Auth\LoginController@logout')->name('logout');
+
+Route::get('/register','Auth\RegisterController@showRegistrationForm')->name('form-register');
+
+Route::post('/register','Auth\RegisterController@register')->name('register');
+
+//List:
 
 Route::get('/admin/list_role', 'Dashboard\RoleController@index')->name('dashboards.roles.list_role');
 
@@ -140,7 +159,7 @@ Route::get('/admin/{id}/edit_publisher', 'Dashboard\PublisherController@edit')->
 
 Route::get('/admin/{id}/edit_category', 'Dashboard\CategoryController@edit')->name('dashboards.categories.edit_category');
 
-Route::get('/admin/{id}/edit_user', 'Dashboard\UserController@edit')->name('dashboards.users.edit_user');
+Route::get('/admin/{email}/edit_user', 'Dashboard\UserController@edit')->name('dashboards.users.edit_user');
 
 Route::get('/admin/{id}/edit_orderAddress', 'Dashboard\OrderAddressController@edit')->name('dashboards.orderAddresses.edit_orderAddress');
 
@@ -164,7 +183,7 @@ Route::put('/admin/{id}/list_publisher', 'Dashboard\PublisherController@update')
 
 Route::put('/admin/{id}/list_category', 'Dashboard\CategoryController@update')->name('dashboards.categories.update');
 
-Route::put('/admin/{id}/list_user', 'Dashboard\UserController@update')->name('dashboards.users.update');
+Route::put('/admin/{email}/list_user', 'Dashboard\UserController@update')->name('dashboards.users.update');
 
 Route::put('/admin/{id}/list_orderAddress', 'Dashboard\OrderAddressController@update')->name('dashboards.orderAddresses.update');
 
@@ -179,4 +198,18 @@ Route::put('/admin/{id}/list_review', 'Dashboard\ReviewController@update')->name
 //Destroy:
 
 Route::delete('/admin/{id}/list_role', 'Dashboard\RoleController@destroy')->name('dashboards.roles.destroy');
+
+Route::delete('/admin/{id}/list_address','Dashboard\AddressController@destroy')->name('dashboards.addresses.destroy');
+
+Route::delete('/admin/{id}/list_publisher', 'Dashboard\PublisherController@destroy')->name('dashboards.publishers.destroy');
+
+Route::delete('/admin/{id}/list_user', 'Dashboard\UserController@destroy')->name('dashboards.users.destroy');
+
+Route::delete('/admin/{id}/list_order', 'Dashboard\OrderController@destroy')->name('dashboards.orders.destroy');
+
+Route::delete('admin/{id}/list_product', 'Dashboard\ProductController@destroy')->name('dashboards.products.destroy');
+
+//Show:
+
+Route::get('/admin/{email}/detail_user', 'Dashboard\UserController@show')->name('dashboards.users.detail_user');
 

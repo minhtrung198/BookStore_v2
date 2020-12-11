@@ -1,4 +1,5 @@
-@extends('dashboards.layout.master')
+@extends('dashboards.layout.index')
+@section('js')
 @section('content')
 <form action="{{route('dashboards.reviews.store')}}" method="POST" role="form">
 	<legend>Create Reviews</legend>

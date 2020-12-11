@@ -1,4 +1,5 @@
-@extends('dashboards.layout.master')
+@extends('dashboards.layout.index')
+@section('js')
 @section('content')
 <h1>Edit Orders</h1>
 <form action="{{route('dashboards.orders.update', $orders->id)}}" method="POST" role="form">

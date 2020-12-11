@@ -1,4 +1,5 @@
-@extends('dashboards.layout.master')
+@extends('dashboards.layout.index')
+@section('js')
 @section('content')
 <h1>Edit: {{$publishers->name}}</h1>
 <form action="{{route('dashboards.publishers.update', $publishers->id)}}" method="POST" role="form">

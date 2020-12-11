@@ -1,7 +1,9 @@
-@extends('dashboards.layout.master')
+@extends('dashboards.layout.index')
+@section('js')
 @section('content')
 <h1>Edit User</h1>
-<form action="{{route('dashboards.users.update', $users->id)}}" method="POST" role="form">
+
+<form action="{{route('dashboards.users.update', $users->email)}}" method="POST" role="form">
 	
 	@csrf
 
@@ -27,10 +29,10 @@
 		<input type="email" class="form-control" name="email" placeholder="Input field" value="{{$users->email}}">
 	</div>
 
-	<div class="form-group">
+	<!-- <div class="form-group">
 		<label for="">Email Verified At</label>
 		<input type="email" class="form-control" name="email_verified_at" placeholder="Input field" value="{{$users->email_verified_at}}">
-	</div>
+	</div> -->
 
 	<div class="form-group">
 		<label for="">Password</label>
@@ -38,20 +40,23 @@
 	</div>
 
 	<div class="form-group">
-		<label for="">Role ID</label>
-		<input type="number" class="form-control" name="role_id" placeholder="Input field" value="{{$users->role_id}}">
+		<label for="">Address</label>
+		<input type="text" class="form-control" name="address" placeholder="Input field" value="{{$users->address}}">
 	</div>
 
-	<div class="form-group">
-		<label for="">Address ID</label>
-		<input type="number" class="form-control" name="address_id" placeholder="Input field" value="{{$users->address_id}}">
-	</div>
+	<select name="role_id" id="inputRole_id" class="form-control" required="required">
+		<option value="">Select</option>
+		@foreach($roles as $role)
+		<option value="{{$role->id}}"><span class="badge badge-secondary">{{$role->name}}</span></option>
+		@endforeach
+	</select>
 
 	<div class="form-group">
 		<label for="">Avatar</label>
-		<input type="file" class="form-control" name="avatar" placeholder="Input field" value="{{$users->avatar}}">
+		<input type="file" class="form-control" name="image" placeholder="Input field" value="{{$users->image}}">
 	</div>
 
 	<button type="submit" class="btn btn-primary" action="update">Update</button>
 </form>
+
 @endsection

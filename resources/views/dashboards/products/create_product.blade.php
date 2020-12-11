@@ -1,4 +1,5 @@
-@extends('dashboards.layout.master')
+@extends('dashboards.layout.index')
+@section('js')
 @section('content')
 <form action="{{route('dashboards.products.store')}}" method="POST" role="form">
 	<legend>Create Products</legend>
@@ -19,20 +20,15 @@
 	</div>
 
 	<div class="form-group">
-		<label for="">image</label>
-		<input type="file" name="image" class="form-control" placeholder="Input field">
-	</div>
-	<div class="form-group">
 		<label for="">Price</label>
 		<input type="number" class="form-control" name="price" placeholder="Input field">
 	</div>
+
 	<div class="form-group">
-		<label for="">Status</label>
-		<select name="product_status" id="" class="form-control input-sm m-bot15"> 
-			<option value="0">Ẩn</option>
-			<option value="1">Hiển thị</option>
-		</select>
+		<label for="">Image</label>
+		<input type="file" name="image" class="form-control" placeholder="Input field">
 	</div>
+
 	<div class="form-group">
 		<label for="">Author ID</label>
 		<input type="number" class="form-control" name="author_id" placeholder="Input field">

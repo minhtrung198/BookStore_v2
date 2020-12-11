@@ -1,6 +1,7 @@
 <footer class="app-footer">
-  <div>
-    <a href="">Book Store</a>
+      <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="#">Loc - Trung</a>
+      </div>
   </div>
 </footer>
 <!-- CoreUI and necessary plugins-->

@@ -6,8 +6,8 @@
         <h2>Những Cuốn Sách Phổ Biến</h2>
     </div>
 <div class="row">
-    @foreach($products as $product)
-    <div class="col-md-2">
+    <!-- @foreach($products as $product) -->
+    <div class="col-md-3">
         <div class="single-slide">
             <div class="product-card">
                 <div class="product-header">
@@ -24,11 +24,11 @@
                             <div class="hover-btns">
                                 <form>
                                     @csrf
-                                    <input type="hidden" value="{{$product->id}}" class="cart_id_{{$product->id}}">
-                                    <input type="hidden" value="{{$product->name}}" class="cart_name_{{$product->name}}">
-                                    <input type="hidden" value="{{$product->image}}" class="cart_image_{{$product->image}}">
-                                    <input type="hidden" value="{{$product->price}}" class="cart_price_{{$product->price}}">
-                                    <input type="hidden" value="1" class="cart_qty_{{$product->quantity}}">
+                                    <input type="hidden" value="{{$product->id}}" class="cart_id">
+                                    <input type="hidden" value="{{$product->name}}" class="cart_name">
+                                    <input type="hidden" value="{{$product->image}}" class="cart_image">
+                                    <input type="hidden" value="{{$product->price}}" class="cart_price">
+                                    <input type="hidden" value="1" class="cart_qty">
                                     
                                     <a href="{{route('product.detail',$product->id)}}" class="single-btn">
                                         <i class="fas fa-eye"></i>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="price-block">
                         <span class="price" style="font-size:15px;">{{number_format($product->price).' '.'vnđ'}}</span>
-                        <h4><a href="product-details.html">{{$product->name}}</a></h4>
+                        <h3><a href="product-details.html">{{$product->name}}</a></h3>
 
                        <!--  <del class="price-old">70.000VNĐ</del>
                         <br>
@@ -56,7 +56,8 @@
             </div>
         </div>
     </div>  
-    @endforeach
+    <!-- @endforeach -->
 </div>
+<div class="center-block">{{$products->links()}}</div>
 
     

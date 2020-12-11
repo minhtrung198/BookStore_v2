@@ -25,6 +25,13 @@
     <!-- Global site tag (gtag.js) - Google Analytics-->
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <style>
+        button:focus {outline: none;}
+
+        .card {float: left; margin-left: -15px;}
+
+        .list-group-111 {width: 100%; margin-left: 248px; margin-top: 10px;}
+    </style>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -51,7 +58,6 @@
             </div>
         </main>   
     </div>
- 
     @include('dashboards.layout.footer')
 </body>
 <style type="text/css">

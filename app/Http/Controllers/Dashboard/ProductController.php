@@ -86,6 +86,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $products = Product::find($id);
+        $products->reviews()->delete();
+        $products->orderDetails()->delete();
+        return redirect()->route('dashboards.products.list_product');
     }
 }

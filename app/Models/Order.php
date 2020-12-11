@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     protected $fillable = ['status'];
+    protected $guarded = ['*'];
     public function users()
     {
         return $this->belongsTo('App\Models\User');

@@ -1,4 +1,5 @@
-@extends('dashboards.layout.master')
+@extends('dashboards.layout.index')
+@section('js')
 @section('content')
 <h1>Edit OrderDetails</h1>
 <form action="{{route('dashboards.orderDetails.update', $orderDetails->id)}}" method="POST" role="form">
@@ -14,12 +15,12 @@
 
 	<div class="form-group">
 		<label for="">Price</label>
-		<input type="number" class="form-control" name="price" placeholder="Input field" value="{{$orderDetails->price}}">
+		<input type="text" class="form-control" name="price" placeholder="Input field" value="{{$orderDetails->price}}">
 	</div>
 
 	<div class="form-group">
 		<label for="">Discount</label>
-		<input type="number" class="form-control" name="discount" placeholder="Input field" value="{{$orderDetails->discount}}">
+		<input type="text" class="form-control" name="discount" placeholder="Input field" value="{{$orderDetails->discount}}">
 	</div>
 
 	<div class="form-group">

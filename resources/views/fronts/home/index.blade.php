@@ -50,33 +50,56 @@
         <script src="js/plugins.js"></script>
         <script src="js/ajax-mail.js"></script>
         <script src="js/custom.js"></script>
+        <script src="{{asset('js/sweetalert.min.js')}}"></script>
         <script src="{{asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
-        <!-- <script type="text/javascript">
+        <script type="text/javascript">
             $(document).ready(function(){
                 $('.add-to-cart').click(function(){
-                   var id=$(this).data('id');
-                   var cart_id = $('.cart_id_' + id).val();
-                   var cart_name = $('.cart_name_' + id).val();
-                   var cart_image = $('.cart_image_' + id).val();
-                   var cart_price = $('.cart_price_' + id).val();
-                   var cart_qty = $('.cart_qty_' + id).val();
+                   var id=$(this).data('id');//khi click vao btn thi lay id dau tien, this la btn
+                   var cart_id = $('.cart_id').val();
+                   var name = $('.cart_name').val();
+                   var image = $('.cart_image').val();
+                   var quantity_storage = $('.quantity_storage').val();
+                   var price = $('.cart_price').val();
+                   var quantity = $('.cart_qty').val();
                    var _token = $('input[name="_token"]').val();
-                   $.ajax({
-                         url: '{{url('Front/CartController/add_cart_ajax')}}',
-                        method: 'POST',
-                        data:{
-                            cart_id:cart_id,
-                            cart_name:cart_name,
-                            cart_image:cart_image,
-                            cart_price:cart_price,
-                            cart_qty:cart_qty,
-                            _token:_token},
-                        success:function(data){
-                            alert(data);
-                        }
-                   }); 
+                   if(parseInt(quantity_storage) > parseInt(quantity) ){
+                       alert("Bạn đã đặt quá số lượng hiện có!", "Vui lòng đặt lại cho phù hợp!");
+                   }
+                   else{
+                        $.ajax({
+                            url:'{{url('/add-cart-ajax')}}',
+                            method: 'POST',
+                            data:{
+                                cart_id: cart_id,
+                                name: name,
+                                price:price,
+                                quantity:quantity,
+                                quantity_storage:quantity_storage,
+                                image:image,
+                                _token: _token
+                            },
+                            success:function(data){
+                                swal({
+                                    title: "Đã thêm sản phẩm vào giỏ hàng",
+                                    text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+                                    showCancelButton: true,
+                                    cancelButtonText: "Xem tiếp",
+                                    confirmButtonClass: "btn-success",
+                                    confirmButtonText: "Đi đến giỏ hàng",
+                                    closeOnConfirm: false
+                                },
+                                function() {
+                                    window.location.href = "{{url('/show-cartt')}}";
+                                });
+                                //swal("Here's a message!")
+                                 //alert(data);
+                            }
+                        });
+                   }
                 });
             });
-        </script> -->
+        </script>
+        
     </body>
 </html>

@@ -16,12 +16,45 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $categories = Category::where('status', 1)->get();
+        $products = Product::where('status', 1)->paginate(8);
        
         //dd($categories);
-        return view('fronts.home.index',compact('products'));
+        return view('fronts.home.index',compact('products','categories'));
     }
-    
+    public function search(Request $request)
+    {
+        //$products = Product::where('status', 1)->get();
+        $listSearch = Product::where('name','like','%'.$request->key.'%')
+                            ->orWhere('price',$request->key)
+                            ->orWhere('name',$request->key)->with('categories')
+                            ->get();
+        // $key_value = $request->key;
+        // $categories = Category::where('status', 1)->get();
+        // $listSearch = Product::where('name', 'like', '%'.$key_value.'%')
+                            // ->orWhere('price', 'like', '%'.$key_value.'%')
+                            // ->get();
+        //dd($listSearch);
+       
+        return view('fronts.home.search',compact('categories','listSearch'));
+    }
+    public function showContactForm()
+    {
+        $categories = Category::where('status', 1)->get();
+        return view('fronts.home.contact',compact('categories'));
+    }
+    public function sendEmail(Request $request)
+    {
+        $toEmail = $request->email;
+        $fromEmail = 'admin@gmail.com';
+        $data = ['content'=>$request->content,'username'=>'Trung admin'];
+        \Mail::send('fronts.mails.contact-us',$data,function($message) use ($toEmail,$fromEmail){
+            $message->to($toEmail,'Admin');
+            $message->from($fromEmail,'Customer');
+            $message->subject('Contact Mail');
+        });
+        return 'success';
+    }
     /**
      * Show the form for creating a new resource.
      *

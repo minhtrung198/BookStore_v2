@@ -1,10 +1,17 @@
-@extends('layouts.index')
+@extends('fronts.layouts.index')
 
 @section('content')
+<div class="col-md-12">
+    <div class="col-md-3">
+        @include('fronts.home.menubar')
+
+    </div>
+
+    <div class="col-md-8">
     <div class="tab-content" id="myTabContent">
             <div class="tab-pane show active" id="shop" role="tabpanel" aria-labelledby="shop-tab">
             <div class="promo-section-heading">
-        <h2>Sách Theo Thể Loại/h2>
+        <h2>Sách Theo Thể Loại</h2>
     </div>
     <div class="row">
         @foreach($products as $product)
@@ -54,5 +61,8 @@
         </div>  
         @endforeach
     </div>
+    </div>
+</div>
+   
 @endsection
     

@@ -10,10 +10,13 @@
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <form action="{{route('get-search')}}" method="GET">
+                            @csrf
                             <div class="search">
-                                <input type="text" placeholder="Search">
-                                <button><i class="fa fa-search"></i></button>
+                                <input type="text" name="key" placeholder="TÌm kiếm sản phẩm">
+                                <button type="submit"><i class="fa fa-search"></i></button>
                             </div>
+                            </form>
                         </div>
                         <div class="col-md-3">
                             <div class="user">

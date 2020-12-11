@@ -68,7 +68,7 @@
             
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse navbar-ex1-collapse">
-                        <ul class="nav navbar-nav">
+                        <!-- <ul class="nav navbar-nav">
                             <li><a href="{{route('dashboards.addresses.list_address')}}">Address</a></li>
                             <li><a href="{{route('dashboards.authors.list_author')}}">Author</a></li>
                             <li><a href="{{route('dashboards.categories.list_category')}}">Categories</a></li>
@@ -80,7 +80,7 @@
                             <li><a href="{{route('dashboards.users.list_user')}}">User</a></li>
                             <li><a href="{{route('dashboards.roles.list_role')}}">Role</a></li>
                             <li><a href="{{route('dashboards.reviews.list_review')}}">Review</a></li>
-                        </ul>
+                        </ul> -->
                         <form class="navbar-form navbar-left" role="search">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Search">

@@ -50,5 +50,7 @@
         <script src="js/ajax-mail.js"></script>
         <script src="js/custom.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="{{asset('js/sweetalert.min.js')}}"></script>
+
     </body>
 </html>

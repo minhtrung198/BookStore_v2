@@ -5,9 +5,8 @@
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Products</a></li>
-                    <li class="breadcrumb-item active">Checkout</li>
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item active">Thanh toán</li>
                 </ul>
             </div>
         </div>
@@ -22,59 +21,72 @@
                             <div class="billing-address">
                                 <h2>Địa chỉ thanh toán</h2>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Họ <span style="color:red">*</span></label>
-                                        <input class="form-control" type="text" placeholder="First Name">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Tên <span style="color:red">*</span></label>
-                                        <input class="form-control" type="text" placeholder="Last Name">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>E-mail</label>
-                                        <input class="form-control" type="text" placeholder="E-mail">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Số điện thoại <span style="color:red">*</span></label>
-                                        <input class="form-control" type="text" placeholder="Mobile No">
-                                    </div>
-                                    <div class="col-md-12">
-                                        <label>Địa chỉ <span style="color:red">*</span></label>
-                                        <input class="form-control" type="text" placeholder="Address">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Quốc gia</label>
-                                        <select class="custom-select">
-                                            <option selected>United States</option>
-                                            <option>Afghanistan</option>
-                                            <option>Albania</option>
-                                            <option>Algeria</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Thành phố</label>
-                                        <input class="form-control" type="text" placeholder="City">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Quận</label>
-                                        <input class="form-control" type="text" placeholder="State">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>ZIP Code</label>
-                                        <input class="form-control" type="text" placeholder="ZIP Code">
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="newaccount">
-                                            <label class="custom-control-label" for="newaccount">Create an account</label>
+                                    <form action="{{route('save-checkout')}}" method="POST">
+                                        @csrf
+                                            <div class="col-md-12">
+                                            <p style="color:red">{{ $errors->first('fullname') }}</p>
+                                                <label>Họ tên <span style="color:red">*</span></label>
+                                                @if(\Auth::user()!= null)
+                                                    <input name="fullname" value="{{ \Auth::user()->last_name. ' '.\Auth::user()->first_name }}" class="form-control" type="text" placeholder="">
+                                                @else
+                                                <input class="form-control" type="text" placeholder="Họ tên" name="fullname" value="">
+                                                @endif
+                                            </div>
+                                            <div class="col-md-6">
+                                            <p style="color:red">{{ $errors->first('email') }}</p>
+                                                <label>E-mail</label>
+                                                @if(\Auth::user() != null)
+                                                    <input name="email" value="{{ \Auth::user()->email }}" class="form-control" type="text" placeholder="">
+                                                @else
+                                                <input class="form-control" type="text" placeholder="E-mail" name="email" value="{{ old('email') }}">
+                                                @endif
+                                            </div>
+                                            <div class="col-md-6">
+                                            <p style="color:red">{{ $errors->first('phone') }}</p>
+                                                <label>Số điện thoại <span style="color:red">*</span></label>
+                                                @if(\Auth::user() != null)
+                                                <input name="phone" value="{{ \Auth::user()->phone }}" class="form-control" type="text" placeholder="">
+                                                @else
+                                                <input class="form-control" type="text" placeholder="Số điện thoại" name="phone" value="{{ old('phone') }}">
+                                                @endif
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label>Địa chỉ <span style="color:red">*</span></label>
+                                                @if(Auth::user() != null)
+                                                <input name="address" value="{{ \Auth::user()->address }}" class="form-control" type="text" placeholder="">
+                                                @else
+                                                <input class="form-control" type="text" placeholder="Địa chỉ" name="address">
+                                                @endif
+                                            </div>
+                                            <!-- <div class="col-md-6">
+                                                <label>Quốc gia</label>
+                                                <input class="form-control" type="text" placeholder="" readonly  name="" value="Việt Nam">
+                                                <select class="custom-select">
+                                                    <option selected>United States</option>
+                                                    <option>Afghanistan</option>
+                                                    <option>Albania</option>
+                                                    <option>Algeria</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Thành phố</label>
+                                                <input class="form-control" type="text" placeholder="City">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Quận</label>
+                                                <input class="form-control" type="text" placeholder="State">
+                                            </div> -->
+                                            <div class="col-md-6">
+                                                <label>ZIP Code</label>
+                                                <input class="form-control" type="text" placeholder="ZIP Code">
+                                            </div>
+                                            <div class="col-md-6 checkout-payment">
+                                        
+                                            <div class="col-md-6 checkout-btn">
+                                                <input class="btn checlout-btn" type="submit" name="checkout" value="Thanh Toán"></input>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="shipto">
-                                            <label class="custom-control-label" for="shipto">Ship to different address</label>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
 
@@ -129,19 +141,18 @@
                     <div class="col-lg-4">
                         <div class="checkout-inner">
                             <div class="checkout-summary">
+                                 @php
+                                    $content=Cart::content();
+                                @endphp
                                 <h1>Tổng Hóa Đơn</h1>
-                                <p>Số lượng<span>$99</span></p>
+                                <p>Số lượng<span></span></p>
                                 <p class="sub-total">Thuế VAT<span>$99</span></p>
                                 <p class="ship-cost">Phí ship<span><img src="img/free-delivery.png" width="40px" height="40px" alt=""></span></p>
-                                <h2>Tổng Cộng<span>$100</span></h2>
+                                <h2>Tổng Cộng<span>{{Cart::Subtotal().' '.'vnđ'}}</span></h2>
+                                
                             </div>
 
-                            <div class="checkout-payment">
-                                
-                                <div class="checkout-btn">
-                                    <button>Thanh Toán</button>
-                                </div>
-                            </div>
+                           
                             
                         </div>
                     </div>

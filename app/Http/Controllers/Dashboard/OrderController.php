@@ -86,6 +86,9 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $orders = Order::find($id);
+        $orders->orderDetails()->delete();
+        $orders->orderAddresses()->delete();
+        return redirect()->route('dashboards.orders.list_order');
     }
 }
