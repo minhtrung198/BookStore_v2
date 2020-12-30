@@ -12,8 +12,8 @@ use App\Models\Order;
 use Session;
 use Gloudemans\Shoppingcart\Facades\Cart as Cart;
 use Mail;
-use Auth;
 use App\Mail\ShoppingMail;
+use Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\CreateOrderRequest;
 use App\Models\OrderDetail;
@@ -29,12 +29,24 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //$products = Product::where('status', 1)->get();
+        // dd('gg');
+        $products = Product::where('status', 1)->get();
         $products = Cart::content();
-        $totalAmount = Cart::priceTotal();
-        $cartCount = Cart::content()->count();
-        //$users = Cart::session(auth()->id());
-        return view('fronts.cart.show_checkout',compact('products','users','$totalAmount','$cartCount'));
+        //$total=Cart::total();
+        $cartqty=Cart::count();
+        $cart = Session::get('cart');
+        
+        if ($cart) {
+        // dd('gg1');
+            $totalPayment = $this->subtotal($cart);
+            $totalQuantity = $this->subquantity($cart);
+        }else{
+        // dd('gg2');
+            $totalPayment = 0;
+            $totalQuantity = 0;
+        }
+        //dd('gg');
+        return view('fronts.cart.show_checkout',compact('products','users','cartCount','totalPayment','totalQuantity'));
     }
 
     public function save_checkout(Request $request)
@@ -56,92 +68,104 @@ class OrderController extends Controller
                 'address.required' => 'Bạn chưa nhập địa chỉ.'
             ]
         );
-
-        $totalMoney = str_replace(',','',Cart::subtotal(0,3));
+        $totalPayment  = str_replace(',','',Cart::total(0,3));
         $cart = Session::get('cart');
+        
+        //dd($cart);
+        if ($cart) {
+            $totalPayment = $this->subtotal($cart);
+            $totalQuantity = $this->subquantity($cart);
+        }else{
+            $totalPayment = 0;
+            $totalQuantity = 0;
+        }
         //dd($totalMoney);
         $order_id = array();
-        $user_id = $request->get('user_id');
-        if($user_id != null){
-            $cart = Cart::content();
-            if(Cart::count() >= 1){
+        $data = $request->all();
+        //$user_id = !empty($request->get('user_id')) ? $request->get('user_id') : null ;
+        // $user_id = $request->get('user_id');
+        if(Session::get('user_id') != null){
                 $order_id = Order::insertGetId([
-                'user_id' =>  $user_id,
+                'user_id' =>  Session::get('user_id'),
                 'id' => $request->id,
                 'fullname' => $request->fullname,
-                'total' => (int)$totalMoney,
+                'total' => (int)$totalPayment,
                 'address' => $request->address,
                 'phone' => $request->phone,
                 'email' => $request->email,
-                'quantity' =>$request->quantity,
+                'notes' => $request->notes,
+                'quantity' =>$totalQuantity,
                 'created_at' =>Carbon::now(),
                  ]);
-                 //Cart::destroy();
-                //  $total = Cart::priceTotal();
-                // $this->sendOrderConfirmationMail($order_id, $cart, $total);
-                //return redirect('/')->with('message','Cảm ơn bạn đã đặt hàng.');
-            }
-            else{
-                return redirect('/show-checkout')->with('error', 'There is nothing to order!')->withInput();
-                
-            }
         }
-        //dang nhap
         else{
             $order_id = Order::insertGetId([
-                'user_id' =>  null,
-                'id' => $request->id,
+                'user_id'  =>  null,
+                'id'       => $request->id,
                 'fullname' => $request->fullname,
-                'total' => (int)$totalMoney,
-                'address' => $request->address,
-                'phone' => $request->phone,
-                'email' => $request->email,
-                'quantity' =>$request->quantity,
+                'total'    => (int)$totalPayment,
+                'address'  => $request->address,
+                'phone'    => $request->phone,
+                'email'    => $request->email,
+                'notes'    => $request->notes,
+                'quantity' =>$totalQuantity,
                 'created_at' =>Carbon::now(),
                 ]);
-                // $total = Cart::priceTotal();
-                // $this->sendOrderConfirmationMail($order_id, $cart, $total);
         }
-        //else{
-        if($order_id)
-        {
-            $products = Cart::content();
-            if(Cart::count() >= 1){
-                foreach($products as $product)
-                {
-                    OrderDetail::insert([
-                        'order_id' => $order_id,
-                        'product_id' => $product->id,
-                        'quantity' => $product->quantity,
-                        'price' => $product->price,
-                        'created_at' => Carbon::now(),
-                    ]);
-                //     $total = Cart::priceTotal();
-                // $this->sendOrderConfirmationMail($order_id, $cart, $total);
-                }
-            }    
-            Cart::destroy();
+        if($order_id){
+            $cart = Session::get('cart');
+            foreach($cart as $itemCart)
+            {
+                OrderDetail::insert([
+                    // 'product_id' => $itemCart->id,
+                    'order_id'   => $order_id,
+                    'product_id' => $itemCart['product_id'],
+                    'price'      => $itemCart['price'],
+                    'phone'      => $request->phone,
+                    'quantity'   => $itemCart['qty'],
+                    'fullname'      => $request->fullname,
+                    'created_at' =>Carbon::now(),
+                ]);
+            }
+            $totalPayment = $this->subtotal($cart);
+            $totalQuantity = $this->subquantity($cart);
+            $this->sendOrderConfirmationMail($data, $cart, $totalPayment,$totalQuantity);
+        }
+       
+        Session::forget('cart');
         return redirect('/')->with('message','Cảm ơn bạn đã đặt hàng.');
-    
-        }
-        // Mail::to($order_id->email)->send(new ShoppingMail($order_id));
-        // // Cart::destroy();
-        // Session::forget('cart');
-        // $listCategory = Category::where('status', 1)->get();
-        
-       //dd($request->all());
     }
-    // public function sendOrderConfirmationMail($orderInfo, $cart, $total){
-    //     $toEmail = $orderInfo['email'];
-    //     $fromEmail ='admin@gmail.com';
-    //     $username = $orderInfo['username'];
-    //     $data =['username' => $username, 'orderInfo' => $orderInfo, 'cart' => $cart, 'total' => $total];
-    //     \Mail::send('mails.contact-us', $data, function($message) use ($toEmail, $fromEmail, $username){
-    //         $message->to($toEmail, $username);
-    //         $message->subject('Order Confirmation Mail');
-    //     });
-    // }
-
+   
+    public function sendOrderConfirmationMail($order_id, $cart, $totalPayment,$totalQuantity){
+        $toEmail = $order_id['email'];
+        $fromEmail ='khanhlytran109@gmail.com';
+        $username = $order_id['fullname'];
+        $data =['fullname' => $username, 'order_id' => $order_id, 'cart' => $cart, 'total' => $totalPayment,'totalQuantity' => $totalQuantity];
+        \Mail::send('fronts.mails.sendMail', $data, function($message) use ($toEmail, $fromEmail, $username){
+            $message->to($toEmail, $username);
+            $message->subject('Order Confirmation Mail');
+        });
+    }
+    //ham tinh tong tien
+    public function subtotal($cart)
+    {
+        //dd($cart);
+        $subtotal = 0;
+        foreach ($cart as $key => $cat) {
+             //dd($cat);
+            $subtotal += $cat['qty']*$cat['price'];
+        }
+        return $subtotal;
+    }
+    //ham tinh so luong
+    public function subquantity($cart){
+        $subquantity = 0;
+        foreach ($cart as $key => $cat) {
+             //dd($cat);
+            $subquantity += $cat['qty'];
+        }
+        return $subquantity;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -166,9 +190,20 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        // $cart = Session::get('cart');
+        // // if ($cart) {
+        // // // dd('gg1');
+
+        // //     $totalPayment = $this->subtotal($cart);
+        // // }else{
+        // // dd('gg2');
+
+        // //     $totalPayment = 0;
+        // // }
+        // return view('fronts.cart.show_checkout',compact('cart'));
+        
     }
 
     /**

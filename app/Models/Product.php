@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
-    protected $fillable = ['quantity','name', 'description','price','status','image'];
+    protected $fillable = ['quantity','name', 'description','price','status','image','category_id','author_id','publisher_id'];
     public function orderDetails()
     {
         return $this->hasMany('App\Models\OrderDetail');
@@ -23,8 +23,12 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Publisher');
     }
-    public function categories()
+    public function category()
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo('App\Models\Category','category_id');
+    }
+    public function comment()
+    {
+        return $this->hasMany('App\Models\Comment');
     }
 }

@@ -23,67 +23,66 @@
                                 <div class="row">
                                     <form action="{{route('save-checkout')}}" method="POST">
                                         @csrf
-                                            <div class="col-md-12">
-                                            <p style="color:red">{{ $errors->first('fullname') }}</p>
-                                                <label>Họ tên <span style="color:red">*</span></label>
-                                                @if(\Auth::user()!= null)
-                                                    <input name="fullname" value="{{ \Auth::user()->last_name. ' '.\Auth::user()->first_name }}" class="form-control" type="text" placeholder="">
-                                                @else
-                                                <input class="form-control" type="text" placeholder="Họ tên" name="fullname" value="">
-                                                @endif
-                                            </div>
-                                            <div class="col-md-6">
-                                            <p style="color:red">{{ $errors->first('email') }}</p>
-                                                <label>E-mail</label>
-                                                @if(\Auth::user() != null)
-                                                    <input name="email" value="{{ \Auth::user()->email }}" class="form-control" type="text" placeholder="">
-                                                @else
-                                                <input class="form-control" type="text" placeholder="E-mail" name="email" value="{{ old('email') }}">
-                                                @endif
-                                            </div>
-                                            <div class="col-md-6">
-                                            <p style="color:red">{{ $errors->first('phone') }}</p>
-                                                <label>Số điện thoại <span style="color:red">*</span></label>
-                                                @if(\Auth::user() != null)
-                                                <input name="phone" value="{{ \Auth::user()->phone }}" class="form-control" type="text" placeholder="">
-                                                @else
-                                                <input class="form-control" type="text" placeholder="Số điện thoại" name="phone" value="{{ old('phone') }}">
-                                                @endif
-                                            </div>
-                                            <div class="col-md-12">
-                                                <label>Địa chỉ <span style="color:red">*</span></label>
-                                                @if(Auth::user() != null)
-                                                <input name="address" value="{{ \Auth::user()->address }}" class="form-control" type="text" placeholder="">
-                                                @else
-                                                <input class="form-control" type="text" placeholder="Địa chỉ" name="address">
-                                                @endif
-                                            </div>
-                                            <!-- <div class="col-md-6">
-                                                <label>Quốc gia</label>
-                                                <input class="form-control" type="text" placeholder="" readonly  name="" value="Việt Nam">
-                                                <select class="custom-select">
-                                                    <option selected>United States</option>
-                                                    <option>Afghanistan</option>
-                                                    <option>Albania</option>
-                                                    <option>Algeria</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label>Thành phố</label>
-                                                <input class="form-control" type="text" placeholder="City">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label>Quận</label>
-                                                <input class="form-control" type="text" placeholder="State">
-                                            </div> -->
-                                            <div class="col-md-6">
-                                                <label>ZIP Code</label>
-                                                <input class="form-control" type="text" placeholder="ZIP Code">
-                                            </div>
-                                            <div class="col-md-6 checkout-payment">
-                                        
+                                        <div class="col-md-12">
+                                        <p style="color:red">{{ $errors->first('fullname') }}</p>
+                                            <label>Họ tên <span style="color:red">*</span></label>
+                                            @if(\Auth::user()!= null)
+                                                <input name="fullname" value="{{ \Auth::user()->last_name. ' '.\Auth::user()->first_name }}" class="form-control" type="text" placeholder="">
+                                            @else
+                                            <input class="form-control" type="text" placeholder="Họ tên" name="fullname" value="">
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6">
+                                        <p style="color:red">{{ $errors->first('email') }}</p>
+                                            <label>E-mail</label>
+                                            @if(\Auth::user() != null)
+                                                <input name="email" value="{{ \Auth::user()->email }}" class="form-control" type="text" placeholder="">
+                                            @else
+                                            <input class="form-control" type="text" placeholder="E-mail" name="email" value="{{ old('email') }}">
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6">
+                                        <p style="color:red">{{ $errors->first('phone') }}</p>
+                                            <label>Số điện thoại <span style="color:red">*</span></label>
+                                            @if(\Auth::user() != null)
+                                            <input name="phone" value="{{ \Auth::user()->phone }}" class="form-control" type="text" placeholder="">
+                                            @else
+                                            <input class="form-control" type="text" placeholder="Số điện thoại" name="phone" value="{{ old('phone') }}">
+                                            @endif
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>Địa chỉ <span style="color:red">*</span></label>
+                                            @if(Auth::user() != null)
+                                            <input name="address" value="{{ \Auth::user()->address }}" class="form-control" type="text" placeholder="">
+                                            @else
+                                            <input class="form-control" type="text" placeholder="Địa chỉ" name="address">
+                                            @endif
+                                        </div>
+                                        <!-- <div class="col-md-6">
+                                            <label>Quốc gia</label>
+                                            <input class="form-control" type="text" placeholder="" readonly  name="" value="Việt Nam">
+                                            <select class="custom-select">
+                                                <option selected>United States</option>
+                                                <option>Afghanistan</option>
+                                                <option>Albania</option>
+                                                <option>Algeria</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Thành phố</label>
+                                            <input class="form-control" type="text" placeholder="City">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Quận</label>
+                                            <input class="form-control" type="text" placeholder="State">
+                                        </div> -->
+                                        <div class="col-md-12">
+                                            <label>Ghi chú</label>
+                                            <input class="form-control" type="textarea" name="notes" placeholder="Ghi chú">
+                                        </div>
+                                        <div class="col-md-12 checkout-payment">
                                             <div class="col-md-6 checkout-btn">
-                                                <input class="btn checlout-btn" type="submit" name="checkout" value="Thanh Toán"></input>
+                                                <button class="btn checkout-btn" name="checkout">Thanh Toán</button>
                                             </div>
                                         </div>
                                     </form>
@@ -143,17 +142,14 @@
                             <div class="checkout-summary">
                                  @php
                                     $content=Cart::content();
+                                    $cartqty=Cart::count();
                                 @endphp
                                 <h1>Tổng Hóa Đơn</h1>
-                                <p>Số lượng<span></span></p>
-                                <p class="sub-total">Thuế VAT<span>$99</span></p>
+                                <p>Số lượng<span>{{$totalQuantity}}</span></p>
+                                <p class="sub-total">Thuế VAT<span>0 đ </span></p>
                                 <p class="ship-cost">Phí ship<span><img src="img/free-delivery.png" width="40px" height="40px" alt=""></span></p>
-                                <h2>Tổng Cộng<span>{{Cart::Subtotal().' '.'vnđ'}}</span></h2>
-                                
+                                <p class="ship-cost">Tổng Tiền<span><b>{{number_format($totalPayment)}} VNĐ</b></span></p>
                             </div>
-
-                           
-                            
                         </div>
                     </div>
                 </div>

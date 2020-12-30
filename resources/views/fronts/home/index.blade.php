@@ -50,56 +50,76 @@
         <script src="js/plugins.js"></script>
         <script src="js/ajax-mail.js"></script>
         <script src="js/custom.js"></script>
-        <script src="{{asset('js/sweetalert.min.js')}}"></script>
+        <script src="{{asset('js/sweetalert.js')}}"></script>
         <script src="{{asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function(){
                 $('.add-to-cart').click(function(){
-                   var id=$(this).data('id');//khi click vao btn thi lay id dau tien, this la btn
-                   var cart_id = $('.cart_id').val();
-                   var name = $('.cart_name').val();
-                   var image = $('.cart_image').val();
-                   var quantity_storage = $('.quantity_storage').val();
-                   var price = $('.cart_price').val();
-                   var quantity = $('.cart_qty').val();
-                   var _token = $('input[name="_token"]').val();
-                   if(parseInt(quantity_storage) > parseInt(quantity) ){
-                       alert("Bạn đã đặt quá số lượng hiện có!", "Vui lòng đặt lại cho phù hợp!");
-                   }
-                   else{
-                        $.ajax({
-                            url:'{{url('/add-cart-ajax')}}',
-                            method: 'POST',
-                            data:{
-                                cart_id: cart_id,
-                                name: name,
-                                price:price,
-                                quantity:quantity,
-                                quantity_storage:quantity_storage,
-                                image:image,
-                                _token: _token
+                    var id = $(this).data('id_product');
+                    var cart_id = $('.cart_id_'+id).val();
+                    var cart_name = $('.cart_name_'+id).val();
+                    var cart_image = $('.cart_image_'+id).val();
+                    var cart_price = $('.cart_price_'+id).val();
+                    var cart_quantity = $('.cart_quantity_'+id).val();
+                    var cart_qty = $('.cart_qty_'+id).val();
+                    var _token = $('input[name="_token"]').val();
+                    //alert(id);
+                    $.ajax({
+                        url: "{{route('add-cart')}}",
+                        method: 'POST',
+                        data:{
+                            cart_id:cart_id,
+                            cart_name:cart_name,
+                            cart_image:cart_image,
+                            cart_price:cart_price,
+                            cart_qty:cart_qty,
+                            cart_quantity:cart_quantity,
+                            _token:_token,
+                        },
+                        success:function(data){
+                            swal({
+                                title: "Đã thêm sản phẩm vào giỏ hàng",
+                                text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+                                showCancelButton: true,
+                                cancelButtonText: "Xem tiếp",
+                                confirmButtonClass: "btn-success",
+                                confirmButtonText: "Đi đến giỏ hàng",
+                                closeOnConfirm: false
                             },
-                            success:function(data){
-                                swal({
-                                    title: "Đã thêm sản phẩm vào giỏ hàng",
-                                    text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
-                                    showCancelButton: true,
-                                    cancelButtonText: "Xem tiếp",
-                                    confirmButtonClass: "btn-success",
-                                    confirmButtonText: "Đi đến giỏ hàng",
-                                    closeOnConfirm: false
-                                },
-                                function() {
-                                    window.location.href = "{{url('/show-cartt')}}";
-                                });
-                                //swal("Here's a message!")
-                                 //alert(data);
-                            }
-                        });
-                   }
+                            function() {
+                                window.location.href = "{{route('show-cartt')}}";
+                            });
+                        }
+                    });
+
                 });
             });
         </script>
-        
+
+        <script type="text/javascript">
+            $('#keywords').keyup(function(){
+                var query = $(this).val();
+                if(query != '')
+                {
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url: "{{route('searchcomplete')}}",
+                        method: "POST",
+                        data: {query:query, _token:_token},
+                        success:function(data){
+                            $('#search_ajax').fadeIn();
+                            $('#search_ajax').html(data);
+                        }
+                    });
+                }else{
+                    $('#search_ajax').fadeOut();
+                }
+            });
+            $(document).on('click','.li_search_ajax', function(){
+                $('#keywords').val($(this).text());
+                $('#search_ajax').fadeOut();
+            });
+        </script>
+         
     </body>
 </html>

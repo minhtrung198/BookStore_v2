@@ -5,15 +5,21 @@
 	<legend>Create Catgories</legend>
 	@csrf
 	<div class="form-group">
-		<label for="">Name</label>
-		<input type="text" class="form-control" name="name" placeholder="Input field">
+		<label for="">Category Name</label>
+		<input type="text" class="form-control" name="category_name" placeholder="Input field">
+		@if($errors->has('category_name'))
+		<p style="color:red">{{$errors->first('category_name')}}</p>
+		@endif
 	</div>
 
-	<div class="form-group">
-		<label for="">Parent ID</label>
-		<input type="number" class="form-control" name="parent_id" placeholder="Input field">
-	</div>
+	{{-- <div class="form-group">
+		<label for="">Status</label>
+		<input type="number" class="form-control" name="status" placeholder="Input field">
+		@if($errors->has('status'))
+		<p style="color:red">{{$errors->first('status')}}</p>
+		@endif
+	</div> --}}
 
-	<button type="submit" class="btn btn-primary" action="save">Create</button>
+	<button type="submit" class="btn btn-danger" action="save">Create</button>
 </form>
 @endsection

@@ -1,20 +1,16 @@
 @extends('dashboards.layout.index')
 @section('js')
 @section('content')
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 200px">
   <img src="{{asset('./img')}}/{{$users->image}}" class="card-img-top" alt="img">
-  <div class="card-body">
-    <h5 class="card-title">{{$users->email}}</h5>
-  </div>
 </div>
 <ul class="list-group-111">
-	<li class="list-group-item">{{$users->first_name}}</li>
-	<li class="list-group-item">{{$users->last_name}}</li>
-	<li class="list-group-item">{{$users->phone}}</li>
-	<li class="list-group-item">{{$users->address}}</li>
-	<li class="list-group-item">NUll</li>
-	<li class="list-group-item">NUll</li>
-	<li class="list-group-item">NUll</li>
+	<li class="list-group-item">Role: {{$users->role->name}}</li>
+	<li class="list-group-item">First Name: {{$users->first_name}}</li>
+	<li class="list-group-item">Last Name: {{$users->last_name}}</li>
+	<li class="list-group-item">Email: {{$users->email}}</li>
+	<li class="list-group-item">Phone: {{$users->phone}}</li>
+	<li class="list-group-item">Address: {{$users->address}}</li>
 </ul>
 <br>
 <br>

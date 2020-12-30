@@ -6,7 +6,7 @@
         <h2>Những Cuốn Sách Phổ Biến</h2>
     </div>
 <div class="row">
-    <!-- @foreach($products as $product) -->
+    @foreach($products as $product)
     <div class="col-md-3">
         <div class="single-slide">
             <div class="product-card">
@@ -24,19 +24,17 @@
                             <div class="hover-btns">
                                 <form>
                                     @csrf
-                                    <input type="hidden" value="{{$product->id}}" class="cart_id">
-                                    <input type="hidden" value="{{$product->name}}" class="cart_name">
-                                    <input type="hidden" value="{{$product->image}}" class="cart_image">
-                                    <input type="hidden" value="{{$product->price}}" class="cart_price">
-                                    <input type="hidden" value="1" class="cart_qty">
+                                    <input type="hidden" value="{{$product->id}}" class="cart_id_{{$product->id}}">
+                                    <input type="hidden" value="{{$product->name}}" class="cart_name_{{$product->id}}">
+                                    <input type="hidden" value="{{$product->image}}" class="cart_image_{{$product->id}}">
+                                    <input type="hidden" value="{{$product->price}}" class="cart_price_{{$product->id}}">
+                                    <!-- <input type="hidden" value="{{$product->quantity}}" name="product_quantity" class="cart_quantity_{{$product->id}}"> -->
+                                    <input type="hidden" value="1" class="cart_qty_{{$product->id}}">
                                     
                                     <a href="{{route('product.detail',$product->id)}}" class="single-btn">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <!-- <a href="{{route('product.detail',$product->id)}}" class="single-btn">
-                                        <i class="fas fa-eye"></i>
-                                    </a> -->
-                                    <button type="button" class="single-btn add-to-cart" data-id="{{$product->id}}" name="add-to-cart">
+                                    <button type="submit" class="single-btn add-to-cart" data-id_product="{{$product->id}}" name="add-to-cart">
                                         <i class="fas fa-shopping-basket"></i>
                                     </button>
                                 </form>    
@@ -45,7 +43,7 @@
                     </div>
                     <div class="price-block">
                         <span class="price" style="font-size:15px;">{{number_format($product->price).' '.'vnđ'}}</span>
-                        <h3><a href="product-details.html">{{$product->name}}</a></h3>
+                        <h3><a href="{{route('product.detail',$product->id)}}">{{$product->name}}</a></h3>
 
                        <!--  <del class="price-old">70.000VNĐ</del>
                         <br>
@@ -56,8 +54,7 @@
             </div>
         </div>
     </div>  
-    <!-- @endforeach -->
+    @endforeach
+    {{$products->links()}}
 </div>
-<div class="center-block">{{$products->links()}}</div>
-
     

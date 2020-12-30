@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\Product;
 class HomeController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboards.layout.index');
+        $products = Product::all();
+        return view('dashboards.layout.index',\compact('products'));
     }
 
     /**

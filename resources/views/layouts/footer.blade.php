@@ -4,18 +4,18 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-widget">
-                            <h2>Get in Touch</h2>
-                            <div class="contact-info">
-                                <p><i class="fa fa-map-marker"></i>123 E Store, Los Angeles, USA</p>
-                                <p><i class="fa fa-envelope"></i>email@example.com</p>
-                                <p><i class="fa fa-phone"></i>+123-456-7890</p>
+                            <h2>Thông tin liên lạc</h2>
+                            <div class="contact-info" style="width: 295px;" >
+                                <p><i class="fa fa-map-marker"></i>12 Quang Trung, Hải Châu, Đà Nẵng</p>
+                                <p><i class="fa fa-envelope" style="margin-right: 54px"></i>unicornbook@example.com</p>
+                                <p><i class="fa fa-phone" style="    margin-right: 153px;"></i>+123-456-7890</p>
                             </div>
                         </div>
                     </div>
                     
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-widget">
-                            <h2>Follow Us</h2>
+                            <h2>Theo dõi chúng tôi</h2>
                             <div class="contact-info">
                                 <div class="social">
                                     <a href=""><i class="fab fa-twitter"></i></a>
@@ -30,22 +30,22 @@
 
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-widget">
-                            <h2>Company Info</h2>
+                            <h2>Thông tin công ty</h2>
                             <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Terms & Condition</a></li>
+                                <li><a href="#">Về công ty</a></li>
+                                <li><a href="#">Chính sách riêng tư</a></li>
+                                <li><a href="#">Điều khoản-Điều kiện</a></li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-6">
                         <div class="footer-widget">
-                            <h2>Purchase Info</h2>
+                            <h2>Thông tin thanh toán</h2>
                             <ul>
-                                <li><a href="#">Pyament Policy</a></li>
-                                <li><a href="#">Shipping Policy</a></li>
-                                <li><a href="#">Return Policy</a></li>
+                                <li><a href="#">Chính sách thanh toán</a></li>
+                                <li><a href="#">Chính sách vận chuyển</a></li>
+                                <li><a href="#">Chính sách hoàn trả</a></li>
                             </ul>
                         </div>
                     </div>

@@ -10,19 +10,17 @@
 
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="{{route('front-dashboard')}}" class="nav-item nav-link active">Trang chủ</a>|
+                            <a href="{{route('front-dashboard')}}" class="nav-item nav-link active">Trang chủ</a>
                             <a href="{{route('list-product')}}" class="nav-item nav-link">Sản Phẩm</a>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Danh mục</a>
                                 <div class="dropdown-menu">
                                     @foreach($categories as $category)
-                                        <a href="wishlist.html" class="dropdown-item">{{$category->name}}</a>
+                                        <a href="{{route('cate-product',$category->id)}}" class="dropdown-item">{{$category->name}}</a>
                                     @endforeach
                                 </div>
                             </div>
-                            <a href="" class="nav-item nav-link">Chi tiết sản phẩm</a>
-                            <a href="{{route('show-cart')}}" class="nav-item nav-link">Giỏ hàng</a>
-                            <a href="checkout.html" class="nav-item nav-link">Thanh toán</a>
+                            <a href="{{route('show-cartt')}}" class="nav-item nav-link">Giỏ hàng</a>
                         </div>
                         <div class="navbar-nav ml-auto">
                             <div class="nav-item dropdown">
@@ -33,7 +31,7 @@
                                     <a href="{{route('register')}}" class="dropdown-item">Đăng kí</a>
                                     @else
                                     <a href="#" class="dropdown-item">Hi! {{\Auth::user()->first_name}}</a>
-                                    <a href="{{route('user-detail',$user->id)}}" class="dropdown-item">Thông tin</a>
+                                    <a href="{{route('user-infomation',$user->id)}}" class="dropdown-item">Thông tin</a>
                                     <a href="{{route('logout')}}" class="dropdown-item">Logout</a>
                                 @endif
                                 </div>
@@ -43,4 +41,10 @@
                 </nav>
             </div>
         </div>
+            @if (session()->has('message'))
+                    <div class="alert alert-success center-block" role="alert" style="width: 300px;">
+                    <h4 align="center" style="color:black;font-size: 16px;">{{ session()->get('message') }}</h4>
+                    </div>
+            @endif
+       
         <!-- Nav Bar End -->   

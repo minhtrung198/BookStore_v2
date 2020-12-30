@@ -2,9 +2,18 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Role;
+
+use Illuminate\Http\Request;
+
+use App\Http\Requests\RoleRequest;
+
+use App\Http\Controllers\Controller;
+
+use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Facades\Validator;
+
 class RoleController extends Controller
 {
     /**
@@ -36,6 +45,12 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $this->validate($request,[
+            'name'=>'required|unique:roles'
+        ],[
+            'name.required'=>'Trường tên không được bỏ trống',
+            'name.unique'=>'Tên đã tồn tại'
+        ]);
         $data = $request->all();
         Role::create($data);
         return redirect()->route('dashboards.roles.list_role');
@@ -73,6 +88,12 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data = $this->validate($request,[
+            'name'=>'required|unique:roles'
+        ],[
+            'name.required'=>'Trường tên không được bỏ trống',
+            'name.unique'=>'Tên đã tồn tại'
+        ]);
         $data = $request->all();
         Role::find($id)->update($data);
         return redirect()->route('dashboards.roles.list_role');
@@ -87,8 +108,22 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $roles = Role::find($id);
-        // $roles->delete();
+        $roles->delete();
         $roles->users()->delete();
+        return redirect()->route('dashboards.roles.list_role');
+    }
+    public function record(){
+        $roles = Role::onlyTrashed()->get();
+        return view('dashboards.roles.record_role', compact('roles'));
+    }
+    public function restore($id){
+        Role::withTrashed()->where('id', '=', $id)->restore();
+        $roles = Role::all();
+        return redirect()->route('dashboards.roles.list_role');
+    }
+    public function force($id){
+        Role::withTrashed()->where('id', '=', $id)->forceDelete();
+        $roles = Role::all();
         return redirect()->route('dashboards.roles.list_role');
     }
 }

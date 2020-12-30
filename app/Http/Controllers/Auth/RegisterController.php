@@ -54,7 +54,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
     }
 
@@ -71,6 +71,7 @@ class RegisterController extends Controller
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'address' => $data['address'],
             'password' => Hash::make($data['password']),
         ]);
     }
@@ -86,6 +87,7 @@ class RegisterController extends Controller
                 'first_name' => 'required|max:15',
                 'last_name' => 'required|max:20',
                 'phone' => 'required|numeric|min:5',
+                'address' => 'required',
                 'password' => 'required|min:6|max:18',
             ],
             [
@@ -97,9 +99,12 @@ class RegisterController extends Controller
                 'email.required' => 'Trường Email không được bỏ trống',
                 'email.email' => 'Email này không đúng định dạng', 
                 'phone.numeric' => 'SDT không đúng định dạng',
+                'phone.required' => 'Trường số điện thoại không được bỏ trống',
+                'address.required' => 'Trường địa chỉ không được bỏ trống',
                 'password.required' => 'Trường mật khẩu không được bỏ trống',
                 'password.min' => 'Trường mật khẩu tối thiểu 6 ký tự', 
                 'password.max' => 'Trường mật khẩu tối đa 18 ký tự', 
+                //'password.confirmed' => 'Mật khẩu không trùng khớp',
             ]
         );
         $data = $request->all();

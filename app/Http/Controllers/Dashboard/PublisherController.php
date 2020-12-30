@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use DB;
+
 use App\Models\Publisher;
+
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
+
 class PublisherController extends Controller
 {
     /**
@@ -14,7 +19,7 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        $publishers = Publisher::all();
+        $publishers = DB::table('publishers')->paginate(5);
         return view('dashboards.publishers.list_publisher', compact('publishers'));
     }
 
@@ -36,6 +41,12 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $this->validate($request, [
+            'publisher_name'=>'required|unique:publishers|max:255'
+        ],[
+            // 'publisher_name.required'=>'Tên trường không được bỏ trống',
+            // 'publisher_name.unique'=>'Tên đã tồn tại'
+        ]);
         $data = $request->all();
         Publisher::create($data);
         return redirect()->route('dashboards.publishers.list_publisher');
@@ -73,6 +84,12 @@ class PublisherController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data = $this->validate($request, [
+            'publisher_name'=>'required|unique:publishers|max:255'
+        ],[
+            // 'publisher_name.required'=>'Tên trường không được bỏ trống',
+            // 'publisher_name.unique'=>'Tên đã tồn tại'
+        ]);
         $data = $request->all();
         Publisher::find($id)->update($data);
         return redirect()->route('dashboards.publishers.list_publisher');
@@ -87,7 +104,22 @@ class PublisherController extends Controller
     public function destroy($id)
     {
         $publishers = Publisher::find($id);
-        $publishers->products()->delete();
+        $publishers->delete();
+        $publishers->product()->delete();
+        return redirect()->route('dashboards.publishers.list_publisher');
+    }
+    public function record(){
+        $publishers = Publisher::onlyTrashed()->get();
+        return view('dashboards.publishers.record_publisher', compact('publishers'));
+    }
+    public function restore($id){
+        publisher::withTrashed()->where('id', '=', $id)->restore();
+        $publishers = Publisher::all();
+        return redirect()->route('dashboards.publishers.list_publisher');
+    }
+    public function force($id){
+        Publisher::withTrashed()->where('id', '=', $id)->forceDelete();
+        $publishers = Publisher::all();
         return redirect()->route('dashboards.publishers.list_publisher');
     }
 }

@@ -21,6 +21,6 @@
 		<input type="number" class="form-control" name="user_id" placeholder="Input field">
 	</div>
 
-	<button type="submit" class="btn btn-primary" action="save">Create</button>
+	<button type="submit" class="btn btn-danger" action="save">Create</button>
 </form>
 @endsection

@@ -55,7 +55,7 @@ class LoginController extends Controller
                 return redirect()->route('front-dashboard');
             }
         }
-        return redirect()->back()->with('fail','Email, Password is wrong. Please try again !!')->withInput();
+        return redirect()->back()->with('fail','Email hoặc mật khẩu không đúng. Vui lòng thử lại !!')->withInput();
     }
     public function logout()
     {

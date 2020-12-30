@@ -4,7 +4,7 @@
     <div class="tab-content" id="myTabContent">
             <div class="tab-pane show active" id="shop" role="tabpanel" aria-labelledby="shop-tab">
             <div class="promo-section-heading">
-        <h2>Kết quả tìm kiếm thấy {{count($listSearch)}} phù hớp</h2>
+        <h2>Kết quả tìm kiếm thấy {{count($listSearch)}} phù hợp</h2>
     </div>
 <div class="row">
     @foreach($listSearch as $products)
@@ -45,7 +45,7 @@
     </div>  
     @endforeach
    
-
+    {{$listSearch->links()}}
 </div>
 @endsection
     

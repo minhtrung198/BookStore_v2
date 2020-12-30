@@ -1,289 +1,77 @@
 @section('content')
-            <!--=================================
-        Deal of the day 
-        ===================================== -->
-        <section class="section-margin">
-            <div class="container-fluid">
-                <div class="promo-section-heading">
-                    <h2>Những cuốn sách bán chạy nhất tháng 11</h2>
-                </div>
-                <div class="product-slider with-countdown  slider-border-single-row sb-slick-slider" data-slick-setting='{
-                "autoplay": true,
-                "autoplaySpeed": 8000,
-                "slidesToShow": 6,
-                "dots":true
-            }' data-slick-responsive='[
-                {"breakpoint":1400, "settings": {"slidesToShow": 4} },
-                {"breakpoint":992, "settings": {"slidesToShow": 3} },
-                {"breakpoint":768, "settings": {"slidesToShow": 2} },
-                {"breakpoint":575, "settings": {"slidesToShow": 2} },
-                {"breakpoint":490, "settings": {"slidesToShow": 1} }
-            ]'>
+ <section class="section-margin">
+    <div class="container-fluid">
+        <div class="promo-section-heading">
+            <h2> Sách Mới Về</h2>
+        </div>
+        <div class="product-slider with-countdown  slider-border-single-row sb-slick-slider" data-slick-setting='{
+        "autoplay": true,
+        "autoplaySpeed": 8000,
+        "slidesToShow": 6,
+        "dots":true
+    }' data-slick-responsive='[
+        {"breakpoint":1400, "settings": {"slidesToShow": 4} },
+        {"breakpoint":992, "settings": {"slidesToShow": 3} },
+        {"breakpoint":768, "settings": {"slidesToShow": 2} },
+        {"breakpoint":575, "settings": {"slidesToShow": 2} },
+        {"breakpoint":490, "settings": {"slidesToShow": 1} }
+    ]'>
 
+    
+             @foreach($productNew as $product)
+                <div class="col-md-10" style="width: 290px;">
+                    <div class="single-slide">
+                        <div class="product-card">
+                            <div class="product-header">
+                                <!-- <a href="" class="author">
+                                    jpple
+                                </a> -->
+                            </div>
+                            <div class="product-card--body">
+                                <div class="card-image">
+                                    <img src="{{url(asset('./img'))}}/{{$product->image}}" alt="img">
+                                    <div class="hover-contents">
+                                        <a href="product-details.html" class="hover-image">
+                                        </a>
+                                        <div class="hover-btns">
+                                            <form>
+                                                @csrf
+                                                <input type="hidden" value="{{$product->id}}" class="cart_id_{{$product->id}}">
+                                                <input type="hidden" value="{{$product->name}}" class="cart_name_{{$product->id}}">
+                                                <input type="hidden" value="{{$product->image}}" class="cart_image_{{$product->id}}">
+                                                <input type="hidden" value="{{$product->price}}" class="cart_price_{{$product->id}}">
+                                                <input type="hidden" value="{{$product->quantity}}" name="product_quantity" class="cart_quantity_{{$product->id}}">
+                                                <input type="hidden" value="1" class="cart_qty_{{$product->id}}">
+                                                
+                                                <a href="{{route('product.detail',$product->id)}}" class="single-btn">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <!-- <a href="{{route('product.detail',$product->id)}}" class="single-btn">
+                                                    <i class="fas fa-eye"></i>
+                                                </a> -->
+                                                <button type="submit" class="single-btn add-to-cart" data-id_product="{{$product->id}}" name="add-to-cart">
+                                                    <i class="fas fa-shopping-basket"></i>
+                                                </button>
+                                            </form>    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="price-block" style="width: 287px;height: 82px;">
+                                    <span class="price" style="font-size:15px;">{{number_format($product->price).' '.'vnđ'}}</span>
+                                    <h3><a href="{{route('product.detail',$product->id)}}">{{$product->name}}</a></h3>
+                                    <!--  <del class="price-old">70.000VNĐ</del>
+                                    <br>
+                                    <span class="price-discount">Sale 20%</span> -->
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>  
+                @endforeach
             
-                    <div class="single-slide">
-                        <div class="product-card">
-                            <div class="product-header">
-                                <a href="#" class="author">
-                                    Upple
-                                </a>
-                                <h3><a href="product-details.html">Hơn 100 Thí Nghiệm Vui Và Đơn Giản</a></h3>
-                            </div>
-                            <div class="product-card--body">
-                                <div class="card-image">
-                                <img src="img/khoahoc1.jpg" />
-
-                                    <div class="hover-contents">
-                                        <a href="product-details.html" class="hover-image">
-                                            <img src="image/products/product-1.jpg" alt="">
-                                        </a>
-                                        <div class="hover-btns">
-                                            <a href="cart.html" class="single-btn">
-                                                <i class="fas fa-shopping-basket"></i>
-                                            </a>
-                                            <a href="wishlist.html" class="single-btn">
-                                                <i class="fas fa-heart"></i>
-                                            </a>
-                                            <a href="compare.html" class="single-btn">
-                                                <i class="fas fa-random"></i>
-                                            </a>
-                                            <a href="#" data-toggle="modal" data-target="#quickModal"
-                                                class="single-btn">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="price-block">
-                                    <span class="price">45.100 VNĐ</span>
-                                    <del class="price-old">31.20 VNĐ</del>
-                                    <span class="price-discount">20%</span>
-                                </div>
-                                <div class="count-down-block">
-                                    <div class="product-countdown" data-countdown="01/05/2020"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-slide">
-                        <div class="product-card">
-                            <div class="product-header">
-                                <a href="#" class="author">
-                                    Ypple
-                                </a>
-                                <h3><a href="product-details.html">Sách Khoa Học Khổng Lồ Thường Thức</a></h3>
-                            </div>
-                            <div class="product-card--body">
-                                <div class="card-image">
-                                    <img src="img/khoahoc2.jpg" />
-                                    <div class="hover-contents">
-                                        <a href="product-details.html" class="hover-image">
-                                            <img src="image/products/product-2.jpg" alt="">
-                                        </a>
-                                        <div class="hover-btns">
-                                            <a href="cart.html" class="single-btn">
-                                                <i class="fas fa-shopping-basket"></i>
-                                            </a>
-                                            <a href="wishlist.html" class="single-btn">
-                                                <i class="fas fa-heart"></i>
-                                            </a>
-                                            <a href="compare.html" class="single-btn">
-                                                <i class="fas fa-random"></i>
-                                            </a>
-                                            <a href="#" data-toggle="modal" data-target="#quickModal"
-                                                class="single-btn">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="price-block">
-                                    <span class="price">100.500 VNĐ</span>
-                                    <del class="price-old">90.100 VNĐ</del>
-                                    <span class="price-discount">20%</span>
-                                </div>
-                                <div class="count-down-block">
-                                    <div class="product-countdown" data-countdown="01/05/2020"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-slide">
-                        <div class="product-card">
-                            <div class="product-header">
-                                <a href="#" class="author">
-                                    Epple
-                                </a>
-                                <h3><a href="product-details.html">What You Can Learn From Bill Gates</a>
-                                </h3>
-                            </div>
-                            <div class="product-card--body">
-                                <div class="card-image">
-                                    <img src="img/thieunhi1.jpg" />
-                                    <div class="hover-contents">
-                                        <a href="product-details.html" class="hover-image">
-                                            <img src="image/products/product-4.jpg" alt="">
-                                        </a>
-                                        <div class="hover-btns">
-                                            <a href="cart.html" class="single-btn">
-                                                <i class="fas fa-shopping-basket"></i>
-                                            </a>
-                                            <a href="wishlist.html" class="single-btn">
-                                                <i class="fas fa-heart"></i>
-                                            </a>
-                                            <a href="compare.html" class="single-btn">
-                                                <i class="fas fa-random"></i>
-                                            </a>
-                                            <a href="#" data-toggle="modal" data-target="#quickModal"
-                                                class="single-btn">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="price-block">
-                                    <span class="price">£51.20</span>
-                                    <del class="price-old">£51.20</del>
-                                    <span class="price-discount">20%</span>
-                                </div>
-                                <div class="count-down-block">
-                                    <div class="product-countdown" data-countdown="01/05/2020"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-slide">
-                        <div class="product-card">
-                            <div class="product-header">
-                                <a href="#" class="author">
-                                    Rpple
-                                </a>
-                                <h3><a href="product-details.html">Create Better BOOK With The Help Of Your</a></h3>
-                            </div>
-                            <div class="product-card--body">
-                                <div class="card-image">
-                                    <img src="img/category-3.jpg" />
-                                    <div class="hover-contents">
-                                        <a href="product-details.html" class="hover-image">
-                                            <img src="image/products/product-4.jpg" alt="">
-                                        </a>
-                                        <div class="hover-btns">
-                                            <a href="cart.html" class="single-btn">
-                                                <i class="fas fa-shopping-basket"></i>
-                                            </a>
-                                            <a href="wishlist.html" class="single-btn">
-                                                <i class="fas fa-heart"></i>
-                                            </a>
-                                            <a href="compare.html" class="single-btn">
-                                                <i class="fas fa-random"></i>
-                                            </a>
-                                            <a href="#" data-toggle="modal" data-target="#quickModal"
-                                                class="single-btn">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="price-block">
-                                    <span class="price">£51.20</span>
-                                    <del class="price-old">£51.20</del>
-                                    <span class="price-discount">20%</span>
-                                </div>
-                                <div class="count-down-block">
-                                    <div class="product-countdown" data-countdown="01/05/2020"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-slide">
-                        <div class="product-card">
-                            <div class="product-header">
-                                <a href="#" class="author">
-                                    Tpple
-                                </a>
-                                <h3><a href="product-details.html">Turn Your BOOK Into High Machine</a>
-                                </h3>
-                            </div>
-                            <div class="product-card--body">
-                                <div class="card-image">
-                                    <img src="img/category-3.jpg" />
-                                    <div class="hover-contents">
-                                        <a href="product-details.html" class="hover-image">
-                                            <img src="image/products/product-7.jpg" alt="">
-                                        </a>
-                                        <div class="hover-btns">
-                                            <a href="cart.html" class="single-btn">
-                                                <i class="fas fa-shopping-basket"></i>
-                                            </a>
-                                            <a href="wishlist.html" class="single-btn">
-                                                <i class="fas fa-heart"></i>
-                                            </a>
-                                            <a href="compare.html" class="single-btn">
-                                                <i class="fas fa-random"></i>
-                                            </a>
-                                            <a href="#" data-toggle="modal" data-target="#quickModal"
-                                                class="single-btn">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="price-block">
-                                    <span class="price">£51.20</span>
-                                    <del class="price-old">£51.20</del>
-                                    <span class="price-discount">20%</span>
-                                </div>
-                                <div class="count-down-block">
-                                    <div class="product-countdown" data-countdown="01/05/2020"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-slide">
-                        <div class="product-card">
-                            <div class="product-header">
-                                <a href="#" class="author">
-                                    Mpple
-                                </a>
-                                <h3><a href="product-details.html">Revolutionize Your BOOK With These Easy
-                                  </a></h3>
-                            </div>
-                            <div class="product-card--body">
-                                <div class="card-image">
-                                    <img src="img/category-3.jpg" />
-                                    <div class="hover-contents">
-                                        <a href="product-details.html" class="hover-image">
-                                            <img src="image/products/product-11.jpg" alt="">
-                                        </a>
-                                        <div class="hover-btns">
-                                            <a href="cart.html" class="single-btn">
-                                                <i class="fas fa-shopping-basket"></i>
-                                            </a>
-                                            <a href="wishlist.html" class="single-btn">
-                                                <i class="fas fa-heart"></i>
-                                            </a>
-                                            <a href="compare.html" class="single-btn">
-                                                <i class="fas fa-random"></i>
-                                            </a>
-                                            <a href="#" data-toggle="modal" data-target="#quickModal"
-                                                class="single-btn">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="price-block">
-                                    <span class="price">£51.20</span>
-                                    <del class="price-old">£51.20</del>
-                                    <span class="price-discount">20%</span>
-                                </div>
-                                <div class="count-down-block">
-                                    <div class="product-countdown" data-countdown="01/05/2020"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-                </div>
-            </div>
-        </section>
+             
+        </div>
+    </div>
+</section>
 @endsection

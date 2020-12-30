@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Category;
+
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
+
 class CategoryController extends Controller
 {
     /**
@@ -14,8 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('dashboards.categories.list_category', compact('categories'));
+        $category = Category::paginate(5);
+        // dd($categories->toArray());
+        return view('dashboards.categories.list_category', compact('category'));
     }
 
     /**
@@ -36,9 +40,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $this->validate($request, [
+            'category_name'=>'required|unique:categories|max:255'
+        ]);
         $data = $request->all();
         Category::create($data);
         return redirect()->route('dashboards.categories.list_category');
+        // dd($data);
     }
 
     /**
@@ -60,8 +68,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $categories = Category::find($id);
-        return view('dashboards.categories.edit_category', compact('categories'));
+        $category = Category::find($id);
+        return view('dashboards.categories.edit_category', compact('category'));
     }
 
     /**
@@ -73,9 +81,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        $data = $this->validate($request, [
+            'category_name'=>'required|unique:categories|max:255'
+        ]);
+        $data = $request->except('status');
         Category::find($id)->update($data);
         return redirect()->route('dashboards.categories.list_category');
+        // dd($data);
     }
 
     /**
@@ -86,6 +98,23 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $categories = Category::find($id);
+        $categories->delete();
+        $categories->product()->delete();
+        return redirect()->route('dashboards.categories.list_category');
+    }
+    public function record(){
+        $category = Category::onlyTrashed()->get();
+        return view('dashboards.categories.record_category', compact('category'));
+    }
+    public function restore($id){
+        Category::withTrashed()->where('id', '=', $id)->restore();
+        $category = Category::all();
+        return redirect()->route('dashboards.categories.list_category');
+    }
+    public function force($id){
+        Category::withTrashed()->where('id', '=', $id)->forceDelete();
+        $category = Category::all();
+        return redirect()->route('dashboards.categories.list_category');
     }
 }

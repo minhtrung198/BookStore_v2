@@ -19,9 +19,10 @@ class CartController extends Controller
      */
     public function index()//show cart
     {
-
         $listCategory = Category::where('status', 1)->get();
-        return view('fronts.cart.show_cart',compact('listCategory'));
+        $content = Cart::content();
+        //$totalPayment = $this->subtotal($content);
+        return view('fronts.cart.show_cart_ajax',compact('listCategory','totalPayment'));
     }
 
     public function add_cart_ajax(Request $request)
@@ -31,48 +32,110 @@ class CartController extends Controller
         $cart = Session::get('cart');//tao 1 ss kiem tra co ton tai ss carr chua
         if($cart == true)
         {
-            $is_avaiable=0;
-            foreach($cart as $key => $value){
-                if($value['cart_id'] == $data['cart_id']){//no se lay id ben form de so sanh co bang id ben cart nay k neu bang thi ++ len, neu k trung` thi tao id ms
-                    $is_avaiable++;
+             $check=0;
+             foreach($cart as $key => $value){
+                 if($value['product_id'] == $data['cart_id']){//no se lay id ben form de so sanh co bang id ben cart nay k neu bang thi ++ len, neu k trung` thi tao id ms
+                    $check++;
                 }
             }
-            if($is_avaiable == 0){
+            if($check == 0){
                 $cart[] = array(
                     'session_id'=> $session_id,
-                    'name'=> $data['name'],
-                    'cart_id'=> $data['cart_id'],
-                    'image'=> $data['image'],
-                    'quantity'=> $data['qty'],
-                    'price'=> $data['price'],
+                    'name'=> $data['cart_name'],
+                    'product_id'=> $data['cart_id'],
+                    'image'=> $data['cart_image'],
+                    'quantity'=> $data['cart_quantity'],
+                    'qty' => $data['cart_qty'],
+                    'price'=> $data['cart_price'],
                 );
                 Session::put('cart',$cart);//dù có tồn tại hay k, thì cung tạo ss_put 
             }
         }else{
             $cart[] = array(
                 'session_id'=> $session_id,
-                'name'=> $data['name'],
-                'cart_id'=> $data['id'],
-                'image'=> $data['image'],
-                'quantity'=> $data['qty'],
-                'price'=> $data['price'],
+                'name'=> $data['cart_name'],
+                'product_id'=> $data['cart_id'],
+                'image'=> $data['cart_image'],
+                'quantity'=> $data['cart_quantity'],
+                'qty'=> $data['cart_qty'],
+                'price'=> $data['cart_price'],
             );
+            //dd($cart);
+            Session::put('cart',$cart);//dù có tồn tại hay k, thì cung tạo ss_put 
         }
-        Session::put('cart',$cart);//dù có tồn tại hay k, thì cung tạo ss_put 
-
         Session::save();
+    }
+    public function subtotal($cart)
+    {
+        $subtotal = 0;
+        foreach ($cart as $key => $cat) {
+            $subtotal += $cat['qty']*$cat['price'];
+        }
+        return $subtotal;
     }
     public function showCartbyAjax()
     {
         $cart = Session::get('cart');
-        
-        $products = Product::where('status', 1)->get();
-        
-        return view('fronts.cart.show_cart_ajax', compact('listCategory'));
+        //dd($cart);
+        if ($cart) {
+            $totalPayment = $this->subtotal($cart);
+            //dd($totalPayment);
+        }else{
+            $totalPayment = 0;
+        }
+        $listCategory = Category::where('status', 1)->get();
+        //dd($cart);
+        return view('fronts.cart.show_cart_ajax',compact('listCategory','totalPayment'));
+    }
+    public function updateCarbyAjax(Request $request)//k dua vao ss_id
+    {
+        $data = $request->all();
+        $cart = Session::get('cart');
+        if($cart==true){
+            $message = '';
+            foreach($data['cart_qty'] as $key => $qty){
+                //echo $key;
+                foreach($cart as $session => $value){//$key so sanh vs $session 
+                    if($value['session_id'] == $key && $qty<$cart[$session]['quantity']){
+                        $cart[$session]['qty'] = $qty;
+                        $message.='<p style="color:blue">Cập nhập số lượng: '.$cart[$session]['name'].' thành công</p>';
+                    }elseif($value['session_id'] == $key && $qty>$cart[$session]['quantity']){
+                        $message.='<p style="color:red">Cập nhập số lượng: '.$cart[$session]['name'].' thất bại</p>';
+                    }
+                }
+            }
+            Session::put('cart',$cart);
+
+            //dd($message);
+            return redirect()->back()->with('message',$message);
+        }
+    }
+    //reset gio hang, ma chua dc
+    public function deleteAll(){
+        $cart = Session::get('cart');
+        if($cart == true){
+            Session::forget('cart');
+            return redirect()->back()->with('message','Giỏ hàng của bạn đang trống !');
+        }
+    }
+    public function deleteCart($session_id){
+        $cart = Session::get('cart');
+        if($cart == true){
+            foreach($cart as $key => $value){
+                if($value['session_id'] == $session_id){
+                    unset($cart[$key]);
+                }
+            }
+            Session::put('cart',$cart);
+            return redirect()->back()->with('message','Bạn đã xóa sản phẩm thành công !');
+        }else{
+            return redirect()->back()->with('message','Bạn đã xóa sản phẩm thất bại !');
+        }
     }
     public function save_cart(Request $request)
     {
-        $productID = $request->product_id_hidden;
+        $productID = $request->product_id;
+        //dd($productID);
         $products = Product::where('id',$productID)->first();
         $quantity = $request->qty;
         $data['id']=$products->id;
@@ -97,6 +160,7 @@ class CartController extends Controller
         Cart::update($rowId,$qty);//
         return Redirect()->route('show-cart');
     }
+    
     /**
      * Show the form for creating a new resource.
      *

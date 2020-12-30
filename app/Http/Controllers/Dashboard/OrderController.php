@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Order;
+
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
+
 class OrderController extends Controller
 {
     /**
@@ -14,8 +17,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::get();
         return view('dashboards.orders.list_order', compact('orders'));
+        // dd($orders);
     }
 
     /**

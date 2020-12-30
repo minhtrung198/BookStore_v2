@@ -28,7 +28,8 @@
     
         @include('fronts.home.header')
         @yield('content')
-    
+    </body>
+    <footer>
         <!-- jQuery -->
         <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')}}"></script>
         <!-- Bootstrap JavaScript -->
@@ -56,6 +57,54 @@
                 }
             });
         });
-</script> -->
-    </body>
+        </script> -->
+        <script>
+            $(document).ready(function(){
+                $('.add-to-cart').click(function(){
+                    var id = $(this).data('id_product');
+                    var cart_id = $('.cart_id_'+id).val();
+                    var cart_name = $('.cart_name_'+id).val();
+                    var cart_image = $('.cart_image_'+id).val();
+                    var cart_price = $('.cart_price_'+id).val();
+                    var cart_quantity = $('.cart_quantity_'+id).val();
+                    var cart_qty = $('.cart_qty_'+id).val();
+                    var _token = $('input[name="_token"]').val();
+                    //alert(cart_name);
+                    if(parseInt(cart_qty) > parseInt(cart_quantity)){
+                        alert("Bạn đã đặt quá số lượng trong kho vui lòng đặt nhỏ hơn" +cart_quantity);
+                    }else{
+                    $.ajax({
+                        url: "{{route('add-cart')}}",
+                        method: 'POST',
+                        data:{
+                            cart_id:cart_id,
+                            cart_name:cart_name,
+                            cart_image:cart_image,
+                            cart_price:cart_price,
+                            cart_qty:cart_qty,
+                            cart_quantity:cart_quantity,
+                            _token:_token
+                        },
+                        success:function(data){
+                            swal({
+                                title: "Đã thêm sản phẩm vào giỏ hàng",
+                                text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+                                showCancelButton: true,
+                                cancelButtonText: "Xem tiếp",
+                                confirmButtonClass: "btn-success",
+                                confirmButtonText: "Đi đến giỏ hàng",
+                                closeOnConfirm: false
+                            },
+                            function() {
+                                window.location.href = "{{route('show-cartt')}}";
+                            });
+                        }
+                    });
+                    }
+                 });
+                
+            });
+        </script>
+    </footer>
+    
 </html>

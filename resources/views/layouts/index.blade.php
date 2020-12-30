@@ -15,6 +15,7 @@
         <!-- CSS Libraries -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="lib/slick/slick.css" rel="stylesheet">
         <link href="lib/slick/slick-theme.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" media="screen" href="css/plugins.css" />
@@ -49,8 +50,88 @@
         <script src="js/plugins.js"></script>
         <script src="js/ajax-mail.js"></script>
         <script src="js/custom.js"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="{{asset('js/sweetalert.min.js')}}"></script>
+        <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+        <script src="{{asset('js/sweetalert.js')}}"></script>
 
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#sort').on('change',function(){
+                    var url = $(this).val();
+                    //alert(url);
+                    if(url){
+                        window.location = url;
+                    }
+                    return false;
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function(){
+                $('.add-to-cart').click(function(){
+                    var id = $(this).data('id_product');
+                    var cart_id = $('.cart_id_'+id).val();
+                    var cart_name = $('.cart_name_'+id).val();
+                    var cart_image = $('.cart_image_'+id).val();
+                    var cart_price = $('.cart_price_'+id).val();
+                    var cart_quantity = $('.cart_quantity_'+id).val();
+                    var cart_qty = $('.cart_qty_'+id).val();
+                    var _token = $('input[name="_token"]').val();
+                    //alert(id);
+                    $.ajax({
+                        url: "{{route('add-cart')}}",
+                        method: 'POST',
+                        data:{
+                            cart_id:cart_id,
+                            cart_name:cart_name,
+                            cart_image:cart_image,
+                            cart_price:cart_price,
+                            cart_qty:cart_qty,
+                            cart_quantity:cart_quantity,
+                            _token:_token,
+                        },
+                        success:function(data){
+                            swal({
+                                title: "Đã thêm sản phẩm vào giỏ hàng",
+                                text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+                                showCancelButton: true,
+                                cancelButtonText: "Xem tiếp",
+                                confirmButtonClass: "btn-success",
+                                confirmButtonText: "Đi đến giỏ hàng",
+                                closeOnConfirm: false
+                            },
+                            function() {
+                                window.location.href = "{{route('show-cartt')}}";
+                            });
+                        }
+                    });
+
+                });
+            });
+        </script>
+         <script type="text/javascript">
+            $('#keywords').keyup(function(){
+                var query = $(this).val();
+                if(query != '')
+                {
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url: "{{route('searchcomplete')}}",
+                        method: "POST",
+                        data: {query:query, _token:_token},
+                        success:function(data){
+                            $('#search_ajax').fadeIn();
+                            $('#search_ajax').html(data);
+                        }
+                    });
+                }else{
+                    $('#search_ajax').fadeOut();
+                }
+            });
+            $(document).on('click','.li_search', function(){
+                $('#keywords').val($(this).text());
+                $('#search_ajax').fadeOut();
+            });
+        </script>
+       
     </body>
 </html>

@@ -26,11 +26,29 @@
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
-        button:focus {outline: none;}
+        button:focus    {outline: none;}
 
-        .card {float: left; margin-left: -15px;}
+        .card           {float: left; margin-left: -15px;}
 
-        .list-group-111 {width: 100%; margin-left: 248px; margin-top: 10px;}
+        .list-group-111 {width: 93%; margin-left: 150px; margin-top: 10px;}
+
+        h1              {float: left;}
+
+        .search         {float: right; margin-top: 12px;}
+
+        input           {width: 300px;}
+
+        input:focus     {outline: none;}
+
+        button          {margin-left: -10px;}
+
+        .add            {float: right;}
+
+        .but1           {float: right; margin-top: 7px;}
+
+        .but1 a         {margin-left: 10px;}
+
+        .sort           {width: 5%; float: left; margin-top: 7px; margin-left: 10px;} 
     </style>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -66,3 +84,15 @@
     }
 </style>
 </html>
+<script type="text/javascript">
+            $(document).ready(function(){
+                $('#sort').on('change',function(){
+                    var url = $(this).val();
+                    //alert(url);
+                    if(url){
+                        window.location = url;
+                    }
+                    return false;
+                });
+            });
+    </script>

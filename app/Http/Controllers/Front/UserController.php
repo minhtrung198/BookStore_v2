@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        //return view('fronts.customer.index');
     }
 
     /**
@@ -47,7 +47,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $users = User::find($id);
+        return view('fronts.customer.index',compact('users'));
     }
 
     /**
@@ -59,7 +60,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $users = User::find($id);
-        return view('fronts.customer.index',compact('users'));
+        return view('fronts.customer.detail',compact('users'));
     }
 
     /**
@@ -72,8 +73,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->except('_method','_token');
+        $data['password'] = bcrypt($data['password']);
         User::find($id)->update($data);
-        return redirect()->route('user-detail');
+        return redirect()->back()->with('message','Cập nhập thành công!');
     }
 
     /**
@@ -88,8 +90,9 @@ class UserController extends Controller
     }
     public function userDetail($id)
     {
-        $users = User::with('address')->find($id);
+        $users = User::find($id);
         //dd($users->toArray());
-        return view('fronts.customer.index',compact('users'));
+        return view('fronts.customer.detail',compact('users'));
     }
+    
 }

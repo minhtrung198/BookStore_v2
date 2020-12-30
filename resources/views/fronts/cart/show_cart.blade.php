@@ -8,10 +8,10 @@
             <div class="container-fluid">
                 <div class="row" style="margin-top: -289px;margin-left: 300px">
                 @if (session()->has('message'))
-				<div class="alert alert-danger" role="alert">
-				  <h4 align="center" style="color:red">{{ session()->get('message') }}</h4>
-				</div>
-			@endif
+                    <div class="alert alert-danger" role="alert">
+                    <h4 align="center" style="color:red">{{ session()->get('message') }}</h4>
+                    </div>
+			    @endif
                     <div class="col-md-12">
                         <div class="cart-page-inner">
                             <div class="table-responsive">
@@ -94,7 +94,10 @@
                                             <h2>Thành Tiền<span>{{Cart::Subtotal().' '.'vnđ'}}</span></h2>
                                         </div>
                                         <div class="cart-btn">
-                                            <a href="{{route('show-checkout')}}" style="float: right;"><button style="width: 115px;">Thanh Toán</button></a>
+                                            <form action="{{route('show-payment')}}" method="post">
+                                                @csrf
+                                            <a href="" style="float: right;"><button style="width: 115px;">Thanh Toán</button></a>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

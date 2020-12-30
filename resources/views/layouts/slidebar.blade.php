@@ -10,15 +10,16 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <form action="{{route('get-search')}}" method="GET">
+                            <form action="{{route('get-search')}}" method="POST" autocomplete="off">
                             @csrf
                             <div class="search">
-                                <input type="text" name="key" placeholder="TÌm kiếm sản phẩm">
+                                <input type="text" name="key" id="keywords"  placeholder="Tìm kiếm sản phẩm">
+                                <div id="search_ajax"></div>
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </div>
                             </form>
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <div class="user">
                                 <a href="wishlist.html" class="btn wishlist">
                                     <i class="fa fa-heart"></i>
@@ -29,7 +30,7 @@
                                     <span>(0)</span>
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -47,7 +48,7 @@
                                     </li>
                                     <li class="nav-item">
                                         @foreach($categories as $category)
-                                        <a class="nav-link" href="{{route('cate-product',$category->id)}}"><i class="fa fa-book"></i>{{$category->name}}<span>(12)</span></a>
+                                        <a class="nav-link" href="{{route('cate-product',$category->id)}}"><i class="fa fa-book"></i>{{$category->name}}</a>
                                         @endforeach
                                     </li>
                                     <!-- <li class="nav-item">
@@ -125,7 +126,7 @@
             <!-- Brand End -->      
             
             <!-- Feature Start-->
-            <div class="feature">
+            <!-- <div class="feature">
                 <div class="container-fluid">
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-6 feature-col">
@@ -166,7 +167,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Feature End-->      
             
             <!-- Category Start-->

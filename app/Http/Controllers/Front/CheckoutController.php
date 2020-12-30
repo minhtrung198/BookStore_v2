@@ -14,6 +14,6 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        return view('fronts.cart.show_checkout');
+        
     }
 }

@@ -13,11 +13,13 @@
             <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
             <img class="img-avatar" src="{{asset('./img/danger.jpg')}}" >
             </a>
-            <div class="dropdown-menu dropdown-menu-right">
+             <div class="navbar-nav ml-auto">
+                <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="">
                 <i class="fa fa-user"></i> Profile</a>
             <a class="dropdown-item" href="{{route('logout')}}">
                 <i class="fa fa-lock"></i> Logout</a>
+            </div>
             </div>
         </li>
     </ul>

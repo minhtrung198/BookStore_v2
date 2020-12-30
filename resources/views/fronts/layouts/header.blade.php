@@ -20,8 +20,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <a href="{{route('show-cart')}}" class="nav-item nav-link">Giỏ hàng</a>
-                            <a href="checkout.html" class="nav-item nav-link">Thanh toán</a>
+                            <a href="{{route('show-cartt')}}" class="nav-item nav-link">Giỏ hàng</a>
                         </div>
                         <div class="navbar-nav ml-auto">
                             <div class="nav-item dropdown">
@@ -32,7 +31,7 @@
                                     <a href="{{route('register')}}" class="dropdown-item">Đăng kí</a>
                                     @else
                                     <a href="#" class="dropdown-item">Hi! {{\Auth::user()->first_name}}</a>
-                                    <a href="{{route('user-detail',$user->id)}}" class="dropdown-item">Thông tin</a>
+                                    <a href="{{route('user-infomation',$users->id)}}" class="dropdown-item">Thông tin</a>
                                     <a href="{{route('logout')}}" class="dropdown-item">Logout</a>
                                 @endif
                                 </div>
@@ -42,4 +41,10 @@
                 </nav>
             </div>
         </div>
+            @if (session()->has('message'))
+                    <div class="alert alert-success center-block" role="alert" style="width: 300px;">
+                    <h4 align="center" style="color:black;font-size: 16px;">{!! session()->get('message') !!}</h4>
+                    </div>
+            @endif
+       
         <!-- Nav Bar End -->   

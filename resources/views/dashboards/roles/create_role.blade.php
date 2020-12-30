@@ -7,8 +7,11 @@
 	<div class="form-group">
 		<label for="">Name</label>
 		<input type="text" class="form-control" name="name" placeholder="Input field">
+		@if($errors->has('name'))
+		<p style="color:red">{{$errors->first('name')}}</p>
+		@endif
 	</div>
 
-	<button type="submit" class="btn btn-primary" action="save">Create</button>
+	<button type="submit" class="btn btn-danger" action="save">Create</button>
 </form>
 @endsection

@@ -17,26 +17,38 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::where('status', 1)->get();
-        $products = Product::where('status', 1)->paginate(8);
-       
+        $products = Product::where('status', 1)->paginate(8);//listproduct
+        //list sách mơi về
+        $productNew = Product::where('status',1)->get()->sortByDesc('created_at')->take(20);
         //dd($categories);
-        return view('fronts.home.index',compact('products','categories'));
+        return view('fronts.home.index',compact('products','categories','productNew'));
     }
     public function search(Request $request)
     {
-        //$products = Product::where('status', 1)->get();
-        $listSearch = Product::where('name','like','%'.$request->key.'%')
+        $key_word = $request->key;
+        $listSearch = Product::with('category')->where('name','like','%'.$request->key.'%')
                             ->orWhere('price',$request->key)
-                            ->orWhere('name',$request->key)->with('categories')
-                            ->get();
-        // $key_value = $request->key;
-        // $categories = Category::where('status', 1)->get();
-        // $listSearch = Product::where('name', 'like', '%'.$key_value.'%')
-                            // ->orWhere('price', 'like', '%'.$key_value.'%')
-                            // ->get();
+                            ->orWhere('name',$request->key)
+                            ->orWhereHas('category',function($query) use($key_word){
+                            return $query->where('name','like','%'.$key_word.'%');
+                            })->paginate(20);
         //dd($listSearch);
-       
-        return view('fronts.home.search',compact('categories','listSearch'));
+        return view('fronts.home.search',compact('listSearch'));
+    }
+    public function searchauto(Request $request)
+    {
+        $data = $request->all();
+        if($data['query']){
+            $products = Product::where('status',1)->where('name','LIKE','%'.$data['query'].'%')
+                                ->orWhere('price','LIKE','%'.$data['query'].'%')->get();
+            $output = '<ul class="dropdown-menu" style="display:block;position:relative">';
+            foreach($products as $key => $value){
+                $output .=' <li class="li_search"><a href="">'.$value->name.'</a></li>';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
+        return view('fronts.home.search');
     }
     public function showContactForm()
     {
@@ -55,6 +67,7 @@ class HomeController extends Controller
         });
         return 'success';
     }
+    
     /**
      * Show the form for creating a new resource.
      *

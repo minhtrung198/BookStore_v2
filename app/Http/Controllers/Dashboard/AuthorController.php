@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use DB;
+
 use App\Models\Author;
+
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
+
+use Illuminate\Pagination\Paginator;
+
 class AuthorController extends Controller
 {
     /**
@@ -14,7 +21,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();
+        $authors = DB::table('authors')->paginate(5);
         return view('dashboards.authors.list_author', compact('authors'));
     }
 
@@ -36,6 +43,12 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $this->validate($request, [
+            'author_name'=>'required|unique:authors|max:255'
+        ],[
+            // 'author_name.required'=>'Trường tên không được bỏ trống',
+            // 'author_name.unique'=>'Tên đã tồn tại'
+        ]);
         $data = $request->all();
         Author::create($data);
         return redirect()->route('dashboards.authors.list_author');
@@ -73,6 +86,12 @@ class AuthorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data = $this->validate($request, [
+            'author_name'=>'required|unique:authors|max:255'
+        ],[
+            // 'author_name.required'=>'Trường tên không được bỏ trống',
+            // 'author_name.unique'=>'Tên đã tồn tại'
+        ]);
         $data = $request->all();
         Author::find($id)->update($data);
         return redirect()->route('dashboards.authors.list_author');
@@ -86,6 +105,23 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $authors = Author::find($id);
+        $authors->delete();
+        $authors->product()->delete();
+        return redirect()->route('dashboards.authors.list_author');
+    }
+    public function record(){
+        $authors = Author::onlyTrashed()->get();
+        return view('dashboards.authors.record_author', compact('authors'));
+    }
+    public function restore($id){
+        Author::withTrashed()->where('id', '=', $id)->restore();
+        $authors = Author::all();
+        return redirect()->route('dashboards.authors.list_author');
+    }
+    public function force($id){
+        Author::withTrashed()->where('id', '=', $id)->forceDelete();
+        $authors = Author::all();
+        return redirect()->route('dashboards.authors.list_author');
     }
 }
